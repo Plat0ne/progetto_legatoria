@@ -70,35 +70,19 @@
 
     <!-- Heading -->
     <div class="sidebar-heading">
-        Aggiunte
+        Gestione Personale
     </div>
-
-    <!-- Nav Item - Pages Collapse Menu -->
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
-            aria-expanded="true" aria-controls="collapsePages">
-            <i class="fas fa-fw fa-folder"></i>
-            <span>Pagine</span>
-        </a>
-        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Schermate di login:</h6>
-                <a class="collapse-item" href="{{ route('admin.login') }}">Login</a>
-                <a class="collapse-item" href="{{ route('admin.dashboard') }}">Registrazione</a>
-                <a class="collapse-item" href="{{ route('admin.dashboard') }}">Password dimenticata</a>
-                <div class="collapse-divider"></div>
-                <h6 class="collapse-header">Altre pagine:</h6>
-                <a class="collapse-item" href="{{ route('admin.dashboard') }}">Pagina 404</a>
-                <a class="collapse-item" href="{{ route('admin.dashboard') }}">Pagina vuota</a>
-            </div>
-        </div>
-    </li>
 
     <!-- Nav Item - Charts -->
     <li class="nav-item">
         <a class="nav-link {{ $rotta_corrente == 'admin.utenti.index' ? 'active' : '' }}" href="{{ route('admin.utenti.index') }}">
-            <i class="fas fa-fw fa-users"></i>
+            <i class="fas fa-fw fa-user"></i>
             <span>Utenti</span></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link {{ $rotta_corrente == 'admin.operatori.index' ? 'active' : '' }}" href="{{ route('operatori.index') }}">
+            <i class="fas fa-fw fa-hard-hat"></i>
+            <span>Operatori</span></a>
     </li>
 
     <!-- Divider -->

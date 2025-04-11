@@ -4,12 +4,18 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Worker;
+use App\Http\Controllers\Controller;
 
 class WorkerController extends Controller
 {
 
     public function index()
     {
+        $workers=Worker::orderBy('created_at', 'desc')->get();
+        return view('admin.crud_operatori.index', [
+            'title' => 'Operatori',
+            'workers' => $workers
+        ]);
         
     }
 
@@ -56,8 +62,13 @@ class WorkerController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Worker $worker)
     {
-        //
+        try {
+            $worker->delete();
+            return redirect()->route('operatori.index')->with('success', 'Operatore (' . $worker->codice_operatore . ') eliminato!');
+        } catch (\Exception $e) {
+            return redirect()->route('operatori.index')->with('error', 'Errore durante l\'eliminazione dell\'operatore!');
+        }
     }
 }

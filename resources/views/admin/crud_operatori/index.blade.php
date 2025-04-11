@@ -18,27 +18,28 @@
     <div class="container datatable-generic">
 
         <h1 class="mb-4">{{ $title }}</h1>
-        <button class="btn btn-primary mb-3" type="button" data-toggle="modal" data-target="#userModal" >Aggiungi Utente</button>
+        <button class="btn btn-primary mb-3" type="button" data-toggle="modal" data-target="#userModal" >Aggiungi operatore</button>
 
         <table class="table table-dark">
             <thead class="thead-light">
                 <tr>
+                    <th>ID</th>
                     <th>Codice Operatore</th>
                     <th>Numero Casa/Familiare</th>
                     <th>Creato il</th>
-                    <th>Anche admin</th>
                     <th>Azioni</th>
                 </tr>
             </thead>
             <tbody id="userTable">
                 @foreach($workers as $w)
-                <tr id="row-{{ $w->codice_operatore }}">
-                    <td>{{ $w->numero }}</td>
-                    <td>{{ $w->operatore ? 'Sì' : 'No' }}</td>
+                <tr id="row-{{ $w->id_operatore }}">
+                    <td>{{ $w->id_operatore }}</td>
+                    <td>{{ $w->codice_operatore }}</td>
+                    <td>{{ $w->numero_operatore }}</td>
                     <td>{{ $w->created_at->format('d/m/Y H:i') }}</td>
                     <td>
                         <button class="btn btn-sm btn-warning text-dark" onclick='openEditModal(@json($w))'>Modifica</button>
-                        <form action="{{ route('admin.utenti.destroy', $w) }}" method="POST" style="display:inline;" onsubmit="return confirm('Sei sicuro?')">
+                        <form action="{{ route('operatori.destroy', $w) }}" method="POST" style="display:inline;" onsubmit="return confirm('Sei sicuro?')">
                             @csrf
                             @method('DELETE')
                             <button class="btn btn-sm btn-danger">Elimina</button>
@@ -59,33 +60,26 @@
       @csrf
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="userModalLabel">Aggiungi Utente</h5>
+          <h5 class="modal-title" id="userModalLabel">Aggiungi operatore</h5>
           <button type="button" class="btn-close" data-dismiss="modal" aria-label="Chiudi"></button>
         </div>
         <div class="modal-body">
-            <input type="hidden" id="user_id" name="user_id">
+            <input type="hidden" id="id_operatore" name="id_operatore">
             <div class="mb-3">
-                <label for="name" class="form-label">Nome</label>
-                <input type="text" name="name" id="name" class="form-control" required>
+                <label for="codice_operatore" class="form-label">Codice Operatore</label>
+                <input type="text" name="codice_operatore" id="codice_operatore" class="form-control" required placeholder="N-COGNOME">
             </div>
+           
             <div class="mb-3">
-                <label for="email" class="form-label">Email</label>
-                <input type="email" name="email" id="email" class="form-control" required>
+                <label for="numero_operatore" class="form-label">numero casa/famiglia</label>
+                <input type="tel" name="numero_operatore" id="numero_operatore" class="form-control" required placeholder="es. 0123456789">
             </div>
-            <div class="mb-3 password-field">
-                <label for="password" class="form-label">Password</label>
-                <input type="password" name="password" id="password" class="form-control">
-            </div>
-            <div class="mb-3 form-check">
-                <input type="checkbox" class="form-check-input" name="operatore" id="operatore" value="1">
-                <label class="form-check-label" for="operatore">Operatore</label>
-            </div>
+
             <div id="message_popup" class=" rounded d-none text-center" style="">
-            </div>
 
         </div>
         <div class="modal-footer">
-          <button id="aggiugni_utente" type="button" class="btn btn-success">Salva</button>
+          <button id="aggiugni_operatore" type="button" class="btn btn-success">Salva</button>
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
         </div>
       </div>
@@ -106,7 +100,7 @@
             }, 3000);
         }
 
-        $(document).on('click', '#aggiugni_utente', function(e) {
+        $(document).on('click', '#aggiugni_operatore', function(e) {
             e.preventDefault();
 
             var dati_form = {

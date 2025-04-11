@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\{AuthenticationController, DashboardController, U
 use App\Http\Controllers\{WelcomeController, WorkerController};
 
 
+
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/login', [AuthenticationController::class, 'ottineni_pagina_login'])->name('login');
     Route::post('/login', [AuthenticationController::class, 'tentativoLogin'])->name('tentativoLogin');
@@ -31,7 +32,14 @@ Route::middleware(['controlloSessione'])->group(function () {
         // Route::delete('/utenti/{user}', [UserControllerAdmin::class, 'destroy'])->name('utenti.destroy');
     });
 
-    Route::resource('/operatori', WorkerController::class);
+    //Route::resource('/operatori', WorkerController::class);
+
+    Route::post("/operatori", [WorkerController::class, 'store'])->name('operatori.store');
+    Route::get("/operatori", [WorkerController::class, 'index'])->name('operatori.index');
+    Route::put("/operatori/{worker}", [WorkerController::class, 'update'])->name('operatori.update');
+    Route::delete("/operatori/{worker}", [WorkerController::class, 'destroy'])->name('operatori.destroy');
+
+
 });
 
 
