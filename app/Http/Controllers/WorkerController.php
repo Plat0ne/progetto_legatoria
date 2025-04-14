@@ -32,7 +32,26 @@ class WorkerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'codice_operatore' => 'required|string|unique:workers,codice_operatore',
+            'numero_operatore' => 'required|string|unique:workers,numero_operatore'
+        ]);
+
+        try {
+            $worker = Worker::create([
+                'codice_operatore' => $request->codice_operatore,
+                'numero_operatore' => $request->numero_operatore
+            ]);
+        
+            if (!$worker) {
+                return response()->json(['success' => false, 'message' => 'errore interno, operatore nullo'], 422);
+            }
+        
+            return response()->json(['success' => true, 'message' => 'Operatore creato con successo!'], 200);
+        } catch (\Exception $e) {
+            error_log($e->getMessage());
+            return response()->json(['success' => false, 'message' => 'Eccezione: ' . $e->getMessage()], 422);
+        }
     }
 
     /**

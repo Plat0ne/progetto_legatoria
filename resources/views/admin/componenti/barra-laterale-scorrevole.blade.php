@@ -73,8 +73,28 @@
         Gestione Personale
     </div>
 
-    <!-- Nav Item - Charts -->
     <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse_gestione_personale"
+            aria-expanded="true" aria-controls="collapse_gestione_personale">
+            <i class="fas fa-fw fa-user"></i>
+            <span>Gestione personale</span>
+        </a>
+        <div id="collapse_gestione_personale" class="collapse" aria-labelledby="headingUtilities"
+            data-parent="#accordionSidebar">
+            <div class="bg-info text-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="{{ route('admin.utenti.index') }}">
+                    <i class="fas fa-fw fa-user bg-primary"></i>
+                    Utenti</a>
+
+                <a class="collapse-item" href="{{ route('operatori.index') }}">
+                    <i class="fas fa-fw fa-hard-hat bg-warning"></i>
+                    Operatori</a>
+            </div>
+        </div>
+    </li>
+
+    <!-- Nav Item - Charts -->
+    {{-- <li class="nav-item">
         <a class="nav-link {{ $rotta_corrente == 'admin.utenti.index' ? 'active' : '' }}" href="{{ route('admin.utenti.index') }}">
             <i class="fas fa-fw fa-user"></i>
             <span>Utenti</span></a>
@@ -83,7 +103,7 @@
         <a class="nav-link {{ $rotta_corrente == 'admin.operatori.index' ? 'active' : '' }}" href="{{ route('operatori.index') }}">
             <i class="fas fa-fw fa-hard-hat"></i>
             <span>Operatori</span></a>
-    </li>
+    </li> --}}
 
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">

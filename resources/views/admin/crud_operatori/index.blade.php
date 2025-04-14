@@ -104,26 +104,25 @@
             e.preventDefault();
 
             var dati_form = {
-                name: $('#name').val(),
-                email: $('#email').val(),
-                password: $('#password').val(),
-                operatore: $('#operatore').is(':checked') ? 1 : 0,
+                codice_operatore: $('#codice_operatore').val(),
+                numero_operatore: $('#numero_operatore').val(),
             };
 
             //controllo se ci sono errori nei dati inseriti
-            if (dati_form.name.trim() === '') {
-                showPopup('Inserisci un nome', false);
+            if (dati_form.codice_operatore.trim() === '') {
+                showPopup('Inserisci un codice operatore', false);
                 return;
             }
-            if (dati_form.email.trim() === '') {
-                showPopup('Inserisci un indirizzo email', false);
+            if (!/^[A-Z]{1}-[A-Z]+$/u.test(dati_form.codice_operatore) && !/^[A-Z]{1}\.[A-Z]+$/u.test(dati_form.codice_operatore)) {
+                showPopup('Il codice operatore deve essere formato in questa maniera "N-COGNOME" oppure "N.COGNOME", solo maiuscole', false);
                 return;
             }
-            if (dati_form.password.trim() === '') {
-                showPopup('Inserisci una password', false);
+            if (dati_form.numero_operatore.trim() === '') {
+                showPopup('Inserisci un numero operatore', false);
                 return;
-            }else if (dati_form.password.length < 6) {
-                showPopup('La password deve avere almeno 6 caratteri', false);
+            }
+            if (!/^[0-9]{10}$/.test(dati_form.numero_operatore)) {
+                showPopup('immetti un numero valido!', false);
                 return;
             }
 
@@ -135,16 +134,15 @@
             });
 
             $.ajax({
-                url: "{{ route('admin.utenti.store') }}",
+                url: "{{ route('operatori.store') }}",
                 type: 'POST',
                 data: dati_form,
                 dataType: 'json',
                 success: function(response) {
                     var newRow = `
                         <tr>
-                            <td>${dati_form.name}</td>
-                            <td>${dati_form.email}</td>
-                            <td>${dati_form.operatore ? 'Sì' : 'No'}</td>
+                            <td>${dati_form.codice_operatore}</td>
+                            <td>${dati_form.numero_operatore}</td>
                             <td>{{ \Carbon\Carbon::now()->format('d/m/Y H:i:s') }}</td>
                             <td>
                                 <button type="button" class="btn btn-success" onclick="location.reload()">Refresh page</button>
@@ -183,6 +181,7 @@
 
             // Reset stato
             popup.classList.remove('fade', 'bg-success', 'bg-danger', 'd-none');
+            popup.textContent = '';
             popup.innerHTML = `<strong class='text-white'>${message}</strong>`;
 
             if (success) {
@@ -191,7 +190,7 @@
                 popup.classList.add('bg-danger');
             }
 
-            // Mostra per 3 secondi, poi nascondi
+            // Mostra per 3 secondi, poi mettiamo una dnone
             setTimeout(() => {
                 popup.classList.add('fade');
                 setTimeout(() => popup.classList.add('d-none'), 1000);
