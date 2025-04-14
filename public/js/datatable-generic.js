@@ -1,32 +1,32 @@
+console.log('Debug: DataTable inizializzato!!!');
+
 $(document).ready(function() {
+    
 
-	var currentRoute = window.location.href.split('route=')[1].replace(/_/g, ' ');
-	console.log(currentRoute);
-
-    // Create a new row for search inputs
+    // Creo una nuova riga per le barre di ricerca
     var searchRow = $('<tr></tr>').appendTo($('#datatable-generic thead'));
 
-    // Setup - add a text input to each footer cell
+    // Imposta - aggiungi un input di testo a ogni cella del footer
     $('#datatable-generic thead th').each(function (i) {
         var title = $(this).text();
 
-		        if (!title || $(this).hasClass('NoSearchbar')) {
-			$('<th></th>').appendTo(searchRow).html(`
-				<div></div>
-			`);
+        if (!title || $(this).hasClass('NoSearchbar')) {
+            $('<th></th>').appendTo(searchRow).html(`
+                <div></div>
+            `);
             return;
         }
         
-        // Add the title to the original th
+        // Aggiungi il titolo alla cella originale
         $(this).html(`<span>${title}</span>`);
 
-        // Add a search input to the search row
+        // Aggiungi una barra di ricerca alla riga di ricerca
         $('<th></th>').appendTo(searchRow).html(`
             <input type="text" placeholder="" data-index="${i}" style="width: 100%; height: 25px; padding: 2px; font-size: 15px;" />
         `);
     });
 
-    // Initialize DataTable and store it in the 'table' variable
+    // Inizializza DataTable e memorizzalo nella variabile 'table'
     var table = $('#datatable-generic').DataTable({
         responsive: true,
         language: {
@@ -58,7 +58,7 @@ $(document).ready(function() {
             {
                 extend: 'copyHtml5',
                 text: 'Copia',
-				title: `Export_${moment($('#start_date').val()).format('DD-MM-YYYY')}_al_${moment($('#end_date').val()).format('DD-MM-YYYY')}`,
+				title: 'report Legatoria',
                 exportOptions: {
                     columns: ':visible :not(.NoExport)'
                 }
@@ -66,7 +66,7 @@ $(document).ready(function() {
             {
                 extend: 'excelHtml5',
                 text: 'Excel',
-				title: `Export_${moment($('#start_date').val()).format('DD-MM-YYYY')}_al_${moment($('#end_date').val()).format('DD-MM-YYYY')}`,
+				title: 'report Legatoria',
                 exportOptions: {
                     columns: ':visible :not(.NoExport)'
                 }
@@ -74,7 +74,7 @@ $(document).ready(function() {
             {
                 extend: 'csvHtml5',
                 text: 'CSV',
-				title: `Export_${moment($('#start_date').val()).format('DD-MM-YYYY')}_al_${moment($('#end_date').val()).format('DD-MM-YYYY')}`,
+				title: 'report Legatoria',
                 exportOptions: {
                     columns: ':visible :not(.NoExport)'
                 }
@@ -82,7 +82,7 @@ $(document).ready(function() {
             {
                 extend: 'pdfHtml5',
                 text: 'PDF',
-				title: `Export_${moment($('#start_date').val()).format('DD-MM-YYYY')}_al_${moment($('#end_date').val()).format('DD-MM-YYYY')}`,
+				title: `report Legatoria`,
                 exportOptions: {
                     columns: ':visible :not(.NoExport)'
                 }
@@ -98,7 +98,7 @@ $(document).ready(function() {
 		]
     });
 
-    // Filter event handler
+    // Event handler per la ricerca
     $(table.table().container()).on('keyup', 'thead input', function () {
         table
             .column($(this).data('index'))

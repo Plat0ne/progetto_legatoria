@@ -15,42 +15,42 @@
         </div>
     @endif
 
-    <div class="container datatable-generic">
+    <div class="container">
 
         <button class="btn btn-primary mb-3" type="button" data-toggle="modal" data-target="#userModal" >Aggiungi Utente</button>
 
-        <table class="table table-dark">
-            <thead class="thead-light">
-                <tr>
-                    <th>Fase ID</th>
-                    <th>Codice Operatore</th>
-                    <th>Codice Commessa</th>
-                    <th>Codice Macchina</th>
-                    <th>Start Segnatura</th>
-                    <th>End Segnatura</th>
-                    <th>Qta Fogli</th>
-                    <th>Qta Fogli Lavorati</th>
-                    <th>Timestamp Inizio</th>
-                    <th>Timestamp Fine</th>
-                </tr>
-            </thead>
-            <tbody id="userTable">
-                @foreach($registrazioni_taglio as $lavorazione)
-                <tr id="row-{{ $lavorazione->id }}">
-                    <td>{{ $lavorazione->fase_id }}</td>
-                    <td>{{ $lavorazione->codice_operatore }}</td>
-                    <td>{{ $lavorazione->codice_commessa }}</td>
-                    <td>{{ $lavorazione->codice_macchina }}</td>
-                    <td>{{ $lavorazione->start_segnatura }}</td>
-                    <td>{{ $lavorazione->end_segnatura }}</td>
-                    <td>{{ $lavorazione->qta_fogli }}</td>
-                    <td>{{ $lavorazione->qta_fogli_lavorati }}</td>
-                    <td>{{ $lavorazione->timestamp_inizio }}</td>
-                    <td>{{ $lavorazione->timestamp_fine }}</td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
+            <table id="datatable-generic" class="table table-bordered table-dark" >
+                <thead class="thead-light">
+                    <tr>
+                        <th><strong>Timestamp Inizio</strong></th>
+                        <th><strong>Timestamp Fine</strong></th>
+                        <th><strong>Codice Operatore</strong></th>
+                        <th><strong>Codice Commessa</strong></th>
+                        <th><strong>Codice Macchina</strong></th>
+                        <th><strong>Start Segnatura</strong></th>
+                        <th><strong>End Segnatura</strong></th>
+                        <th><strong>Qta Fogli</strong></th>
+                        <th><strong>Qta Fogli Lavorati</strong></th>                        
+                    </tr>
+                </thead>
+                <tbody id="userTable">
+                    @foreach($registrazioni_taglio as $lavorazione)
+                    <tr id="row-{{ $lavorazione->id }}">
+
+                        <td>{{ \Carbon\Carbon::parse($lavorazione->timestamp_inizio)->format('d/m/Y H:i') }}</td>
+                        <td>{{ \Carbon\Carbon::parse($lavorazione->timestamp_fine)->format('d/m/Y H:i') }}</td>
+                        <td>{{ $lavorazione->codice_operatore }}</td>
+                        <td>{{ $lavorazione->codice_commessa }}</td>
+                        <td>{{ $lavorazione->codice_macchina }}</td>
+                        <td>{{ $lavorazione->start_segnatura }}</td>
+                        <td>{{ $lavorazione->end_segnatura }}</td>
+                        <td>{{ $lavorazione->qta_fogli }}</td>
+                        <td>{{ $lavorazione->qta_fogli_lavorati }}</td>
+                        
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
     </div>
 </div>
 
@@ -59,7 +59,6 @@
 
 @section('scripts_pagine_secondarie')
 <script>
-
 
 </script>
 @endsection

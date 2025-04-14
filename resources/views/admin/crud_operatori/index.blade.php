@@ -19,7 +19,7 @@
 
         <button class="btn btn-primary mb-3" type="button" data-toggle="modal" data-target="#userModal" >Aggiungi operatore</button>
 
-        <table class="table table-dark">
+        <table id="datatable-generic" class="table table-dark">
             <thead class="thead-light">
                 <tr>
                     <th>ID</th>

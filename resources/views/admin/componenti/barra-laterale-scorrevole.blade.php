@@ -43,8 +43,8 @@
                 <a class="collapse-item" href="{{ route('lavorazioni_taglio.index') }}"><i class="fas fa-fw fa-cut"></i> Taglio</a>
                 <a class="collapse-item" href="{{ route('lavorazioni_taglio.index') }}"><i class="fas fa-fw fa-layer-group"></i> Piega</a>
                 <a class="collapse-item" href="{{ route('lavorazioni_taglio.index') }}"><i class="fas fa-fw fa-people-carry"></i> Raccolta</a>
-                <a class="collapse-item" href="{{ route('lavorazioni_taglio.index') }}"><i class="fas fa-fw fa-sewing"></i> Cucitura</a>
-                <a class="collapse-item" href="{{ route('lavorazioni_taglio.index') }}"><i class="fas fa-fw fa-bookmark"></i> Brossura</a>
+                <a class="collapse-item" href="{{ route('lavorazioni_taglio.index') }}"><i class="fas fa-dot-circle"></i> Cucitura</a>
+                <a class="collapse-item" href="{{ route('lavorazioni_taglio.index') }}"><i class="fas fa-book-open"></i> Brossura</a>
                 
             </div>
         </div>
