@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\{AuthenticationController, DashboardController, UserControllerAdmin};
+use App\Http\Controllers\Admin\{AuthenticationController, DashboardController, UserControllerAdmin,LavorazioniTaglioController};
 use App\Http\Controllers\{WelcomeController, WorkerController};
 
 
@@ -23,13 +23,13 @@ Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
 Route::middleware(['controlloSessione'])->group(function () {
     Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
-        Route::resource('/utenti', UserControllerAdmin::class); 
+        // Route::resource('/utenti', UserControllerAdmin::class); 
         #alternativa a fare queste rotte in un' unica riga come resource
-        // #rotte CRUD utenti
-        // Route::post('/utenti', [UserControllerAdmin::class, 'store'])->name('utenti.store');
-        // Route::get('/utenti', [UserControllerAdmin::class, 'index'])->name('utenti.index');
-        // Route::put('/utenti/{user}', [UserControllerAdmin::class, 'update'])->name('utenti.update');
-        // Route::delete('/utenti/{user}', [UserControllerAdmin::class, 'destroy'])->name('utenti.destroy');
+        #rotte CRUD utenti
+        Route::post('/utenti', [UserControllerAdmin::class, 'store'])->name('utenti.store');
+        Route::get('/utenti', [UserControllerAdmin::class, 'index'])->name('utenti.index');
+        Route::put('/utenti/{user}', [UserControllerAdmin::class, 'update'])->name('utenti.update');
+        Route::delete('/utenti/{user}', [UserControllerAdmin::class, 'destroy'])->name('utenti.destroy');
     });
 
     //Route::resource('/operatori', WorkerController::class);
@@ -39,6 +39,8 @@ Route::middleware(['controlloSessione'])->group(function () {
     Route::put("/operatori/{worker}", [WorkerController::class, 'update'])->name('operatori.update');
     Route::delete("/operatori/{worker}", [WorkerController::class, 'destroy'])->name('operatori.destroy');
 
+    //routes per le lavorazioni:
+    Route::get("/lavorazioni_taglio", [LavorazioniTaglioController::class, 'index'])->name('lavorazioni_taglio.index');
 
 });
 

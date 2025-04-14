@@ -73,6 +73,8 @@
                 <!-- Inizio del contenuto principale -->
                 <div class="container-fluid">
                     <body>
+                        <h1 class="mb-4 text-dark"><strong>{{ $title }}</strong></h1>
+
                         @yield('main')
 
                         {{-- includo i datatable --}}

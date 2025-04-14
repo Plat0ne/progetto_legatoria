@@ -17,7 +17,6 @@
 
     <div class="container datatable-generic">
 
-        <h1 class="mb-4">{{ $title }}</h1>
         <button class="btn btn-primary mb-3" type="button" data-toggle="modal" data-target="#userModal" >Aggiungi operatore</button>
 
         <table class="table table-dark">
@@ -38,7 +37,8 @@
                     <td>{{ $w->numero_operatore }}</td>
                     <td>{{ $w->created_at->format('d/m/Y H:i') }}</td>
                     <td>
-                        <button class="btn btn-sm btn-warning text-dark" onclick='openEditModal(@json($w))'>Modifica</button>
+                        <button class="modificaButton btn btn-sm btn-warning text-dark" data-id="{{ $w }}" data-toggle="modal" data-target="#editModal">Modifica</button>
+
                         <form action="{{ route('operatori.destroy', $w) }}" method="POST" style="display:inline;" onsubmit="return confirm('Sei sicuro?')">
                             @csrf
                             @method('DELETE')
@@ -52,7 +52,45 @@
     </div>
 </div>
 
-{{-- Modal --}}
+
+{{-- Modal MODIFICA --}}
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <form id="editForm">
+        @csrf
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="editModalLabel">Modifica operatore</h5>
+            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Chiudi"></button>
+          </div>
+  
+          <div class="modal-body">
+            <input type="hidden" id="id_edit_operatore" name="id_edit_operatore">
+  
+            <div class="mb-3">
+              <label for="codice_edit_operatore" class="form-label">Codice Operatore</label>
+              <input type="text" name="codice_edit_operatore" id="codice_edit_operatore" class="form-control" required placeholder="N-COGNOME">
+            </div>
+  
+            <div class="mb-3">
+              <label for="numero_edit_operatore" class="form-label">Numero casa/famiglia</label>
+              <input type="tel" name="numero_edit_operatore" id="numero_edit_operatore" class="form-control" required placeholder="es. 0123456789">
+            </div>
+  
+            <div id="message_popup_modifica" class="rounded d-none text-center">test</div>
+          </div> <!-- FINE modal-body -->
+  
+          <div class="modal-footer">
+            <button id="modifica_operatore" type="button" class="btn btn-primary">Salva modifiche</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
+          </div>
+        </div> <!-- FINE modal-content -->
+      </form>
+    </div>
+</div>
+
+
+{{-- Modal AGGIUNTA --}}
 <div class="modal fade" id="userModal" tabindex="-1" aria-labelledby="userModalLabel" aria-hidden="true">
   <div class="modal-dialog">
 
@@ -75,7 +113,7 @@
                 <input type="tel" name="numero_operatore" id="numero_operatore" class="form-control" required placeholder="es. 0123456789">
             </div>
 
-            <div id="message_popup" class=" rounded d-none text-center" style="">
+            <div id="message_popup_aggiunta" class=" rounded d-none text-center" style=""></div>
 
         </div>
         <div class="modal-footer">
@@ -86,20 +124,105 @@
     </form>
   </div>
 </div>
+  
+    
 @endsection
 
 @section('scripts_pagine_secondarie')
-<script>
-    $(document).ready(function() {
 
-        if (document.getElementById('session_alert')) {
-            setTimeout(() => {
-                document.getElementById('session_alert').style.transition = "opacity 1s";
-                document.getElementById('session_alert').style.opacity = 0;
-                setTimeout(() => document.getElementById('session_alert').remove(), 1000);
-            }, 3000);
+<script>
+    
+
+    //funzione per controllare la correttezza dei dati
+    function controllaDati(dati_form) {
+        let errors = [];
+
+        if (dati_form.codice_operatore.trim() === '') {
+            errors.push('Inserisci un codice operatore');
+        }
+        if (!/^[A-Z]{1}-[A-Z]+$/u.test(dati_form.codice_operatore) && !/^[A-Z]{1}\.[A-Z]+$/u.test(dati_form.codice_operatore)) {
+            errors.push('Il codice operatore deve essere formato in questa maniera "N-COGNOME" oppure "N.COGNOME", solo maiuscole');
+        }
+        if (dati_form.numero_operatore.trim() === '') {
+            errors.push('Inserisci un numero operatore');
+        }
+        if (!/^[0-9]{10}$/.test(dati_form.numero_operatore)) {
+            errors.push('Immetti un numero valido!');
         }
 
+        return errors;
+    }
+
+    document.querySelectorAll('.modificaButton').forEach(function(button) {
+        button.addEventListener('click', function() {
+            const data = this.getAttribute('data-id');
+            popolaFormEdit(JSON.parse(data));
+        });
+    });
+
+    function popolaFormEdit(worker){
+        $('#editForm')[0].reset();
+        
+        $('#id_edit_operatore').val(worker.id_operatore);
+        $('#codice_edit_operatore').val(worker.codice_operatore);
+        $('#numero_edit_operatore').val(worker.numero_operatore);
+    }
+
+    $(document).ready(function() {
+
+        //script per modifica operatore
+        $('#modifica_operatore').on('click', function() {
+            var id_operatore = $('#id_edit_operatore').val();
+            var codice_operatore = $('#codice_edit_operatore').val();
+            var numero_operatore = $('#numero_edit_operatore').val();
+
+            var dati_form = {
+                codice_operatore: codice_operatore,
+                numero_operatore: numero_operatore,
+            };
+
+            var errors = controllaDati(dati_form);
+            if (errors.length > 0) {
+                showPopup(errors.join('<br>'), false, "message_popup_modifica");
+                console.log(errors);
+                return;
+            }
+
+            $.ajax({                
+                url: "{{ route('operatori.update', ':id') }}".replace(':id', id_operatore),
+                type: 'PUT',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                data: {
+                    codice_operatore: codice_operatore,
+                    numero_operatore: numero_operatore,
+                },
+                success: function(response) {
+                    if (response.success) {
+                        showPopup(response.message, true);
+                        $('#editModal').modal('hide');
+
+                        $('#row-' + id_operatore).addClass('bg-secondary');
+                        $('#row-' + id_operatore).find('td:nth-child(2)').text(codice_operatore);
+                        $('#row-' + id_operatore).find('td:nth-child(3)').text(numero_operatore);
+                    } else {
+                        showPopup(response.message, false);
+                    }
+                        
+
+                },
+                error: function(response) {
+                    console.log(response);
+                    showPopup('Errore durante la modifica dell\'operatore', false);
+                }
+            });
+
+
+
+        });
+
+        //script per aggiunta operatore
         $(document).on('click', '#aggiugni_operatore', function(e) {
             e.preventDefault();
 
@@ -108,24 +231,11 @@
                 numero_operatore: $('#numero_operatore').val(),
             };
 
-            //controllo se ci sono errori nei dati inseriti
-            if (dati_form.codice_operatore.trim() === '') {
-                showPopup('Inserisci un codice operatore', false);
+            var errors = controllaDati(dati_form);
+            if (errors.length > 0) {
+                showPopup(errors.join('<br>'), false);
                 return;
             }
-            if (!/^[A-Z]{1}-[A-Z]+$/u.test(dati_form.codice_operatore) && !/^[A-Z]{1}\.[A-Z]+$/u.test(dati_form.codice_operatore)) {
-                showPopup('Il codice operatore deve essere formato in questa maniera "N-COGNOME" oppure "N.COGNOME", solo maiuscole', false);
-                return;
-            }
-            if (dati_form.numero_operatore.trim() === '') {
-                showPopup('Inserisci un numero operatore', false);
-                return;
-            }
-            if (!/^[0-9]{10}$/.test(dati_form.numero_operatore)) {
-                showPopup('immetti un numero valido!', false);
-                return;
-            }
-
 
             $.ajaxSetup({
                 headers: {
@@ -141,6 +251,7 @@
                 success: function(response) {
                     var newRow = `
                         <tr>
+                            <td>${dati_form.id_operatore}</td>
                             <td>${dati_form.codice_operatore}</td>
                             <td>${dati_form.numero_operatore}</td>
                             <td>{{ \Carbon\Carbon::now()->format('d/m/Y H:i:s') }}</td>
@@ -171,13 +282,10 @@
             });
         });
 
-        function showPopup(message, success = true) {
-            let popup = document.getElementById('message_popup');
+        //_____________________________________________
 
-            if (!popup) {
-                console.error("Popup non trovato!!!!");
-                return;
-            }
+        function showPopup(message, success = true, id_popup = "message_popup_aggiunta") {
+            let popup = document.getElementById(id_popup);
 
             // Reset stato
             popup.classList.remove('fade', 'bg-success', 'bg-danger', 'd-none');
@@ -196,8 +304,9 @@
                 setTimeout(() => popup.classList.add('d-none'), 1000);
             }, 3000);
         }
-    });
-</script>
 
+    });
+
+</script>
 @endsection
 

@@ -73,16 +73,43 @@ class WorkerController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Worker $worker)
     {
-        //
+        $request->validate([
+            'codice_operatore' => 'required|string|unique:workers,codice_operatore,' . $worker->id_operatore . ',id_operatore',
+            'numero_operatore' => 'required|string|unique:workers,numero_operatore,' . $worker->id_operatore . ',id_operatore'
+        ]);
+
+        try {
+            $worker->update([
+                'codice_operatore' => $request->codice_operatore,
+                'numero_operatore' => $request->numero_operatore
+            ]);
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Operatore aggiornato con successo!'
+            ]);
+        } catch (\Exception $e) {
+            error_log($e->getMessage());
+            return response()->json([
+                'success' => false,
+                'message' => 'Eccezione: ' . $e->getMessage(),
+                'errors' => $request->errors()
+            ], 422);
+        }
     }
+    
+
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Worker $worker)
     {
+        if (empty($worker->codice_operatore)) {
+            return redirect()->route('operatori.index')->with('error', 'Codice operatore non disponibile! '. $worker);
+        }
         try {
             $worker->delete();
             return redirect()->route('operatori.index')->with('success', 'Operatore (' . $worker->codice_operatore . ') eliminato!');

@@ -17,7 +17,6 @@
 
     <div class="container datatable-generic">
 
-        <h1 class="mb-4">{{ $title }}</h1>
         <button class="btn btn-primary mb-3" type="button" data-toggle="modal" data-target="#userModal" >Aggiungi Utente</button>
 
         <table class="table table-dark">
@@ -38,7 +37,7 @@
                     <td>{{ $user->operatore ? 'Sì' : 'No' }}</td>
                     <td>{{ $user->created_at->format('d/m/Y H:i') }}</td>
                     <td>
-                        <button class="btn btn-sm btn-warning text-dark" onclick='openEditModal(@json($user))'>Modifica</button>
+                        <button class="modificaButton btn btn-sm btn-warning text-dark" data-id="{{ $user }}" data-toggle="modal" data-target="#editModal">Modifica</button>
                         <form action="{{ route('admin.utenti.destroy', $user) }}" method="POST" style="display:inline;" onsubmit="return confirm('Sei sicuro?')">
                             @csrf
                             @method('DELETE')
@@ -52,7 +51,48 @@
     </div>
 </div>
 
-{{-- Modal --}}
+
+
+{{-- Modal MODIFICA --}}
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <form id="editForm">
+        @csrf
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="editModalLabel">Modifica utente</h5>
+            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Chiudi"></button>
+          </div>
+  
+          <div class="modal-body">
+            <input type="hidden" id="id_edit_operatore" name="id_edit_operatore">
+  
+            <div class="mb-3">
+              <label for="name_edit" class="form-label">Nome</label>
+              <input type="text" name="name_edit" id="name_edit" class="form-control" required>
+            </div>
+            <div class="mb-3">
+              <label for="email_edit" class="form-label">Email</label>
+              <input type="email" name="email_edit" id="email_edit" class="form-control" required>
+            </div>
+            <div class="mb-3 form-check">
+              <input type="checkbox" class="form-check-input" name="operatore_edit" id="operatore_edit" value="1">
+              <label class="form-check-label" for="operatore_edit">Operatore</label>
+            </div>
+            <div id="message_popup_modifica" class="rounded d-none text-center"></div>
+          </div> <!-- FINE modal-body -->
+  
+          <div class="modal-footer">
+            <button id="modifica_utente" type="button" class="btn btn-primary">Salva modifiche</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
+          </div>
+        </div> <!-- FINE modal-content -->
+      </form>
+    </div>
+</div>
+
+
+{{-- Modal AGGIUNTA --}}
 <div class="modal fade" id="userModal" tabindex="-1" aria-labelledby="userModalLabel" aria-hidden="true">
   <div class="modal-dialog">
 
@@ -81,7 +121,7 @@
                 <input type="checkbox" class="form-check-input" name="operatore" id="operatore" value="1">
                 <label class="form-check-label" for="operatore">Operatore</label>
             </div>
-            <div id="message_popup" class=" rounded d-none text-center" style="">
+            <div id="message_popup_aggiungi" class=" rounded d-none text-center" style="">
             </div>
 
         </div>
@@ -97,6 +137,44 @@
 
 @section('scripts_pagine_secondarie')
 <script>
+
+    //funzione per controllare la correttezza dei dati
+    function controllaDati(dati_form,modifica=false) {
+        let errors = [];
+
+        if (dati_form.name.trim() === '') {
+            errors.push('Inserisci un nome');
+        }
+        if (dati_form.email.trim() === '') {
+            errors.push('Inserisci un indirizzo email');
+        }
+        if (! modifica) {
+            if (dati_form.password.trim() === '') {
+                errors.push('Inserisci una password');
+            } else if (dati_form.password.length < 6) {
+                errors.push('La password deve avere almeno 6 caratteri');
+            }   
+        }
+        return errors;
+    }
+
+    document.querySelectorAll('.modificaButton').forEach(function(button) {
+        button.addEventListener('click', function() {
+            const data = this.getAttribute('data-id');
+            popolaFormEdit(JSON.parse(data));
+        });
+    });
+
+    function popolaFormEdit(user){
+        $('#editForm')[0].reset();
+
+        $('#id_edit_operatore').val(user.id);
+        $('#name_edit').val(user.name);
+        $('#email_edit').val(user.email);
+        $('#operatore_edit').prop('checked', user.operatore);
+    }
+
+
     $(document).ready(function() {
 
         if (document.getElementById('session_alert')) {
@@ -106,6 +184,60 @@
                 setTimeout(() => document.getElementById('session_alert').remove(), 1000);
             }, 3000);
         }
+
+
+        //script per modifica utente
+        $('#modifica_utente').on('click', function() {
+            var id_utente = $('#id_edit_operatore').val();
+            var name = $('#name_edit').val();
+            var email = $('#email_edit').val();
+            var operatore = $('#operatore_edit').is(':checked') ? 1 : 0;
+
+            var dati_form = {
+                id: id_utente,
+                name: name,
+                email: email,
+                operatore: operatore,
+            };
+
+            var errors = controllaDati(dati_form, true);
+            if (errors.length > 0) {
+                    showPopup(errors.join('<br>'), false, "message_popup_modifica");
+                return;
+            }
+
+            $.ajax({
+                url: "{{ route('admin.utenti.update', ':id') }}".replace(':id', id_utente),
+                type: 'PUT',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                data: {
+                    id: id_utente,
+                    name: name,
+                    email: email,
+                    operatore: operatore,
+                },
+                success: function(response) {
+                    if (response.success) {
+                            showPopup(response.message, true, "message_popup_modifica");
+                        $('#editModal').modal('hide');
+                            $('#row-' + id_utente).addClass('bg-secondary');
+                            $('#row-' + id_utente).find('td:nth-child(1)').text(name);
+                            $('#row-' + id_utente).find('td:nth-child(2)').text(email);
+                            operatore= operatore == 1 ? 'Si' : 'No';
+                            $('#row-' + id_utente).find('td:nth-child(3)').text(operatore);
+                            
+                    } else {
+                            showPopup(response.message, false,"message_popup_modifica");
+                    }
+                },
+                error: function(response) {
+                    console.log(response);
+                        showPopup('Errore durante la modifica dell\'utente', false, "message_popup_modifica");
+                }
+            });
+        });
 
         $(document).on('click', '#aggiugni_utente', function(e) {
             e.preventDefault();
@@ -117,23 +249,11 @@
                 operatore: $('#operatore').is(':checked') ? 1 : 0,
             };
 
-            //controllo se ci sono errori nei dati inseriti
-            if (dati_form.name.trim() === '') {
-                showPopup('Inserisci un nome', false);
+            var errors = controllaDati(dati_form);
+            if (errors.length > 0) {
+                showPopup(errors.join('<br>'), false);
                 return;
             }
-            if (dati_form.email.trim() === '') {
-                showPopup('Inserisci un indirizzo email', false);
-                return;
-            }
-            if (dati_form.password.trim() === '') {
-                showPopup('Inserisci una password', false);
-                return;
-            }else if (dati_form.password.length < 6) {
-                showPopup('La password deve avere almeno 6 caratteri', false);
-                return;
-            }
-
 
             $.ajaxSetup({
                 headers: {
@@ -180,13 +300,8 @@
             });
         });
 
-        function showPopup(message, success = true) {
-            let popup = document.getElementById('message_popup');
-
-            if (!popup) {
-                console.error("Popup non trovato!!!!");
-                return;
-            }
+        function showPopup(message, success = true, id_popup = "message_popup_aggiungi") {
+            let popup = document.getElementById(id_popup);
 
             // Reset stato
             popup.classList.remove('fade', 'bg-success', 'bg-danger', 'd-none');

@@ -52,21 +52,38 @@ class UserControllerAdmin extends Controller
         $request->validate([
             'name' => 'required|string',
             'email' => 'required|email|unique:users,email,' . $user->id,
+            'operatore' => 'nullable|boolean',
         ]);
 
-        $user->update([
-            'name' => $request->name,
-            'email' => $request->email
-        ]);
+        try {
+            $user->update([
+                'name' => $request->name,
+                'email' => $request->email,
+                'operatore' => $request->operatore ?? 0
+            ]);
 
-        return redirect()->route('admin.utenti.index')->with('success', 'Utente aggiornato!');
+            return response()->json([
+                'success' => true,
+                'message' => 'Utente aggiornato con successo!'
+            ]);
+        } catch (\Exception $e) {
+            error_log($e->getMessage());
+            return response()->json([
+                'success' => false,
+                'message' => 'Eccezione: ' . $e->getMessage(),
+                'errors' => $request->errors()
+            ], 422);
+        }
     }
 
     public function destroy(User $user)
     {
+        if (empty($user->id)) {
+            return redirect()->route('admin.utenti.index')->with('error', 'Codice utente non disponibile! '. $user);
+        }
         try {
             $user->delete();
-            return redirect()->route('admin.utenti.index')->with('success', 'Utente eliminato!');
+            return redirect()->route('admin.utenti.index')->with('success', 'utente (' . $user->name . ') eliminato!');
         } catch (\Exception $e) {
             return redirect()->route('admin.utenti.index')->with('error', 'Errore durante l\'eliminazione dell\'utente!');
         }
