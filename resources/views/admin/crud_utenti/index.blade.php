@@ -158,15 +158,10 @@
         return errors;
     }
 
-    document.querySelectorAll('.modificaButton').forEach(function(button) {
-        button.addEventListener('click', function() {
-            const data = this.getAttribute('data-id');
-            popolaFormEdit(JSON.parse(data));
-        });
-    });
-
     function popolaFormEdit(user){
         $('#editForm')[0].reset();
+
+        console.log(user);
 
         $('#id_edit_operatore').val(user.id);
         $('#name_edit').val(user.name);
@@ -176,6 +171,13 @@
 
 
     $(document).ready(function() {
+
+        document.querySelectorAll('.modificaButton').forEach(function(button) {
+            button.addEventListener('click', function() {
+                const data = this.getAttribute('data-id');
+                popolaFormEdit(JSON.parse(data));
+            });
+        });
 
         if (document.getElementById('session_alert')) {
             setTimeout(() => {

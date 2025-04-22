@@ -15,11 +15,8 @@
         </div>
     @endif
 
-    <div class="container">
-
-        <button class="btn btn-primary mb-3" type="button" data-toggle="modal" data-target="#userModal" >Aggiungi Utente</button>
-
-            <table id="datatable-generic" class="table table-bordered table-dark" >
+    <div class="table-responsive">
+            <table id="datatable-generic" class="table table-bordered table-striped table-dark" style="">
                 <thead class="thead-light">
                     <tr>
                         <th><strong>Timestamp Inizio</strong></th>

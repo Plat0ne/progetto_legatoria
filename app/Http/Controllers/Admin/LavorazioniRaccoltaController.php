@@ -1,8 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
+use App\Models\LavorazioniRaccolta;
+use App\Http\Controllers\Controller;
+
 
 class LavorazioniRaccoltaController extends Controller
 {
@@ -11,7 +14,13 @@ class LavorazioniRaccoltaController extends Controller
      */
     public function index()
     {
-        //
+        $registrazioni_raccolta = LavorazioniRaccolta::orderByDesc('timestamp_inizio')->get();
+        $data=[
+            'title' => 'Tempi Raccolta',
+            'registrazioni_raccolta' => $registrazioni_raccolta
+        ];
+        return view('admin.lavorazioni.raccolta', $data);
+        
     }
 
     /**
@@ -62,3 +71,4 @@ class LavorazioniRaccoltaController extends Controller
         //
     }
 }
+

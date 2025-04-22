@@ -1,8 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
+use App\Models\LavorazioniBrossura;
+use App\Http\Controllers\Controller;
+
+
 
 class LavorazioniBrossuraController extends Controller
 {
@@ -11,8 +15,15 @@ class LavorazioniBrossuraController extends Controller
      */
     public function index()
     {
-        //
+        $registrazioni_brossura = LavorazioniBrossura::orderByDesc('timestamp_inizio')->get();
+        $data=[
+            'title' => 'Tempi Brossura',
+            'registrazioni_brossura' => $registrazioni_brossura
+        ];
+        return view('admin.lavorazioni.brossura', $data);
+        
     }
+
 
     /**
      * Show the form for creating a new resource.

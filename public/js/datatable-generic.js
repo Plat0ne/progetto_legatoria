@@ -3,30 +3,27 @@ console.log('Debug: DataTable inizializzato!!!');
 $(document).ready(function() {
     
 
-    // Creo una nuova riga per le barre di ricerca
-    var searchRow = $('<tr></tr>').appendTo($('#datatable-generic thead'));
-
-    // Imposta - aggiungi un input di testo a ogni cella del footer
+    //qui impostiamo una barra di ricerca per ogni colonna
     $('#datatable-generic thead th').each(function (i) {
         var title = $(this).text();
 
         if (!title || $(this).hasClass('NoSearchbar')) {
-            $('<th></th>').appendTo(searchRow).html(`
-                <div></div>
+             $('<div></div>').appendTo($(this)).html(`
+                <div><br></div>
             `);
             return;
         }
         
-        // Aggiungi il titolo alla cella originale
-        $(this).html(`<span>${title}</span>`);
+        // // Aggiungi il titolo alla cella originale
+        // $(this).html(`<span>${title}</span>`);
 
-        // Aggiungi una barra di ricerca alla riga di ricerca
-        $('<th></th>').appendTo(searchRow).html(`
+        // Aggiungo una input barr
+        $('<div></div>').appendTo($(this)).html(`
             <input type="text" placeholder="" data-index="${i}" style="width: 100%; height: 25px; padding: 2px; font-size: 15px;" />
         `);
     });
 
-    // Inizializza DataTable e memorizzalo nella variabile 'table'
+    //datatable
     var table = $('#datatable-generic').DataTable({
         responsive: true,
         language: {
@@ -60,7 +57,12 @@ $(document).ready(function() {
                 text: 'Copia',
 				title: 'report Legatoria',
                 exportOptions: {
-                    columns: ':visible :not(.NoExport)'
+                    columns: ':visible :not(.NoExport)',
+					header: true,
+					modifier: {
+						search: 'applied',
+						order: 'applied'
+					}
                 }
             },
             {
@@ -68,7 +70,12 @@ $(document).ready(function() {
                 text: 'Excel',
 				title: 'report Legatoria',
                 exportOptions: {
-                    columns: ':visible :not(.NoExport)'
+                    columns: ':visible :not(.NoExport)',
+					header: true,
+					modifier: {
+						search: 'applied',
+						order: 'applied'
+					}
                 }
             },
             {
@@ -76,7 +83,12 @@ $(document).ready(function() {
                 text: 'CSV',
 				title: 'report Legatoria',
                 exportOptions: {
-                    columns: ':visible :not(.NoExport)'
+                    columns: ':visible :not(.NoExport)',
+					header: true,
+					modifier: {
+						search: 'applied',
+						order: 'applied'
+					}
                 }
             },
             {
@@ -84,15 +96,20 @@ $(document).ready(function() {
                 text: 'PDF',
 				title: `report Legatoria`,
                 exportOptions: {
-                    columns: ':visible :not(.NoExport)'
+                    columns: ':visible :not(.NoExport)',
+					header: true,
+					modifier: {
+						search: 'applied',
+						order: 'applied'
+					}
                 }
             }
         ],
 		columnDefs: [
 			{
-				targets: '_all', // Applica a tutte le colonne
+				targets: '_all',
 				render: function (data, type, row, meta) {
-					return data; // Default per altri usi
+					return data;
 				}
 			}
 		]

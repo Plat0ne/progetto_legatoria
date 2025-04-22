@@ -146,19 +146,14 @@
         if (dati_form.numero_operatore.trim() === '') {
             errors.push('Inserisci un numero operatore');
         }
-        if (!/^[0-9]{10}$/.test(dati_form.numero_operatore)) {
-            errors.push('Immetti un numero valido!');
+        const numero = dati_form.numero_operatore.replace(/\D/g, ''); // Rimuove tutto tranne le cifre
+        if (!/^\d{10}$/.test(numero)) {
+            errors.push('Immetti un numero valido di 10 cifre!');
         }
+
 
         return errors;
     }
-
-    document.querySelectorAll('.modificaButton').forEach(function(button) {
-        button.addEventListener('click', function() {
-            const data = this.getAttribute('data-id');
-            popolaFormEdit(JSON.parse(data));
-        });
-    });
 
     function popolaFormEdit(worker){
         $('#editForm')[0].reset();
@@ -169,12 +164,18 @@
     }
 
     $(document).ready(function() {
+        document.querySelectorAll('.modificaButton').forEach(function(button) {
+            button.addEventListener('click', function() {
+                const data = this.getAttribute('data-id');
+                popolaFormEdit(JSON.parse(data));
+            });
+        });
 
         //script per modifica operatore
         $('#modifica_operatore').on('click', function() {
             var id_operatore = $('#id_edit_operatore').val();
             var codice_operatore = $('#codice_edit_operatore').val();
-            var numero_operatore = $('#numero_edit_operatore').val();
+            var numero_operatore = $('#numero_edit_operatore').val().trim();
 
             var dati_form = {
                 codice_operatore: codice_operatore,

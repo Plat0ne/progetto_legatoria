@@ -19,7 +19,7 @@ class LavorazioniTaglioController extends Controller
             'title' => 'Tempi Taglio',
             'registrazioni_taglio' => $registrazioni_taglio
         ];
-        return view('admin.lavorazioni_taglio', $data);
+        return view('admin.lavorazioni.taglio', $data);
         
     }
 

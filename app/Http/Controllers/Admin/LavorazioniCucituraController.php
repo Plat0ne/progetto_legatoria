@@ -1,8 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
+use App\Models\LavorazioniCucitura;
+use App\Http\Controllers\Controller;
+
 
 class LavorazioniCucituraController extends Controller
 {
@@ -11,7 +14,13 @@ class LavorazioniCucituraController extends Controller
      */
     public function index()
     {
-        //
+        $registrazioni_cucitura = LavorazioniCucitura::orderByDesc('timestamp_inizio')->get();
+        $data=[
+            'title' => 'Tempi Cucitura',
+            'registrazioni_cucitura' => $registrazioni_cucitura
+        ];
+        return view('admin.lavorazioni.cucitura', $data);
+        
     }
 
     /**
@@ -62,3 +71,4 @@ class LavorazioniCucituraController extends Controller
         //
     }
 }
+

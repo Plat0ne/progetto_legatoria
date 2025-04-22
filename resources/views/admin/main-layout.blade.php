@@ -27,7 +27,7 @@
             <!-- Fine della barra laterale sinistra -->
 
             <!-- Wrapper del contenuto -->
-            <div id="content-wrapper" class="d-flex flex-column" style="background: linear-gradient(to right,rgb(231, 241, 255),rgb(1, 20, 31));">
+            <div id="content-wrapper" class="d-flex flex-column" style="background: linear-gradient(to right,rgb(236, 238, 241),rgb(149, 202, 232));">
                 <!-- Contenuto principale -->
                 <div id="content">
                     <!-- Barra superiore -->

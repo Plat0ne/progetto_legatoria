@@ -1,8 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
+use App\Models\LavorazioniPiega;
+use App\Http\Controllers\Controller;
 
 class LavorazioniPiegaController extends Controller
 {
@@ -11,7 +13,12 @@ class LavorazioniPiegaController extends Controller
      */
     public function index()
     {
-        //
+        $registrazioni_piega = LavorazioniPiega::orderByDesc('timestamp_inizio')->get();
+        $data=[
+            'title' => 'Tempi piega',
+            'registrazioni_piega' => $registrazioni_piega
+        ];
+        return view('admin.lavorazioni.piega', $data);
     }
 
     /**

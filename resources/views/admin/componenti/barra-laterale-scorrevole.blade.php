@@ -38,13 +38,13 @@
             <span>Orari</span>
         </a>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Tempi lavorazione fasi:</h6>
+            <div class="py-2 collapse-inner rounded bg-info">
+                <h6 class="collapse-header text-dark">Tempi lavorazione fasi:</h6>
                 <a class="collapse-item" href="{{ route('lavorazioni_taglio.index') }}"><i class="fas fa-fw fa-cut"></i> Taglio</a>
-                <a class="collapse-item" href="{{ route('lavorazioni_taglio.index') }}"><i class="fas fa-fw fa-layer-group"></i> Piega</a>
-                <a class="collapse-item" href="{{ route('lavorazioni_taglio.index') }}"><i class="fas fa-fw fa-people-carry"></i> Raccolta</a>
-                <a class="collapse-item" href="{{ route('lavorazioni_taglio.index') }}"><i class="fas fa-dot-circle"></i> Cucitura</a>
-                <a class="collapse-item" href="{{ route('lavorazioni_taglio.index') }}"><i class="fas fa-book-open"></i> Brossura</a>
+                <a class="collapse-item" href="{{ route('lavorazioni_piega.index') }}"><i class="fas fa-fw fa-layer-group"></i> Piega</a>
+                <a class="collapse-item" href="{{ route('lavorazioni_raccolta.index') }}"><i class="fas fa-fw fa-people-carry"></i> Raccolta</a>
+                <a class="collapse-item" href="{{ route('lavorazioni_cucitura.index') }}"><i class="fas fa-dot-circle"></i> Cucitura</a>
+                <a class="collapse-item" href="{{ route('lavorazioni_brossura.index') }}"><i class="fas fa-book-open"></i> Brossura</a>
                 
             </div>
         </div>
@@ -61,7 +61,7 @@
             data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Strumenti personalizzati:</h6>
-                <a class="collapse-item" href="{{ route('admin.dashboard') }}">Colori</a>
+                <a class="collapse-item" href="{{ route('admin.statistiche.taglio') }}">Statistiche Taglio</a>
                 <a class="collapse-item" href="{{ route('admin.dashboard') }}">Bordi</a>
                 <a class="collapse-item" href="{{ route('admin.dashboard') }}">Animazioni</a>
                 <a class="collapse-item" href="{{ route('admin.dashboard') }}">Altro</a>

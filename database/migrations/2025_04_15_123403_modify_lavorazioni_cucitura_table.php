@@ -11,19 +11,21 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('lavorazioni_taglio', function (Blueprint $table) {
-            $table->id();
+        Schema::create('lavorazioni_cucitura', function (Blueprint $table) {
+            $table->id('id_lc');
             $table->integer('fase_id');
             $table->string('codice_operatore');
             $table->string('codice_commessa');
             $table->string('codice_macchina');
-            $table->string('start_segnatura');
-            $table->string('end_segnatura');
-            $table->integer('qta_fogli');
-            $table->integer('qta_fogli_lavorati');
+            $table->string('macchina_condivisa');
+            $table->string('segnatura');
+            $table->string('segnatura_finita');
+            $table->unsignedInteger('n_colpi_start');
+            $table->unsignedInteger('n_colpi_end');
+            $table->unsignedInteger('pacchetto');
+            $table->unsignedInteger('sottopacchetto');
             $table->timestamp('timestamp_inizio');
             $table->timestamp('timestamp_fine');
-            $table->timestamps();
         });
     }
 
@@ -32,7 +34,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('lavorazioni_taglio');
+        Schema::dropIfExists('lavorazioni_cucitura');
     }
 };
 
