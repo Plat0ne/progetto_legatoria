@@ -35,11 +35,11 @@
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
             aria-expanded="true" aria-controls="collapseTwo">
             <i class="far fa-fw fa-clock"></i>
-            <span>Orari</span>
+            <span></span>
         </a>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="py-2 collapse-inner rounded bg-info">
-                <h6 class="collapse-header text-dark">Tempi lavorazione fasi:</h6>
+                <h6 class="collapse-header text-white">Tempi lavorazione fasi:</h6>
                 <a class="collapse-item" href="{{ route('lavorazioni_taglio.index') }}"><i class="fas fa-fw fa-cut"></i> Taglio</a>
                 <a class="collapse-item" href="{{ route('lavorazioni_piega.index') }}"><i class="fas fa-fw fa-layer-group"></i> Piega</a>
                 <a class="collapse-item" href="{{ route('lavorazioni_raccolta.index') }}"><i class="fas fa-fw fa-people-carry"></i> Raccolta</a>
@@ -55,16 +55,14 @@
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
             aria-expanded="true" aria-controls="collapseUtilities">
             <i class="fas fa-fw fa-wrench"></i>
-            <span>Strumenti</span>
+            <span></span>
         </a>
         <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
             data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Strumenti personalizzati:</h6>
-                <a class="collapse-item" href="{{ route('admin.statistiche.taglio') }}">Statistiche Taglio</a>
-                <a class="collapse-item" href="{{ route('admin.dashboard') }}">Bordi</a>
-                <a class="collapse-item" href="{{ route('admin.dashboard') }}">Animazioni</a>
-                <a class="collapse-item" href="{{ route('admin.dashboard') }}">Altro</a>
+            <div class="bg-white py-2 collapse-inner">
+                <h6 class="collapse-header">Monitoring Azienda:</h6>
+                <a class="collapse-item" href="{{ route('admin.statistiche.fasi') }}">Statistiche Fasi</a>
+                <a class="collapse-item" href="{{ route('admin.dashboard') }}">Orari operatori</a>
             </div>
         </div>
     </li>
@@ -81,17 +79,19 @@
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse_gestione_personale"
             aria-expanded="true" aria-controls="collapse_gestione_personale">
             <i class="fas fa-fw fa-user"></i>
-            <span>Gestione personale</span>
+            <span></span>
         </a>
         <div id="collapse_gestione_personale" class="collapse" aria-labelledby="headingUtilities"
             data-parent="#accordionSidebar">
             <div class="bg-info text-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header text-white">Gestione Personale:</h6>
+
                 <a class="collapse-item" href="{{ route('admin.utenti.index') }}">
-                    <i class="fas fa-fw fa-user bg-primary"></i>
+                    <i class="fas fa-fw fa-user bg-primary rounded"></i>
                     Utenti</a>
 
                 <a class="collapse-item" href="{{ route('operatori.index') }}">
-                    <i class="fas fa-fw fa-hard-hat bg-warning"></i>
+                    <i class="fas fa-fw fa-hard-hat bg-warning rounded"></i>
                     Operatori</a>
             </div>
         </div>

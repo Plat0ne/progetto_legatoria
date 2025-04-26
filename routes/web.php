@@ -17,7 +17,7 @@ Route::middleware(['controlloSessione'])->group(function () {
     Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
       
-        //routes per gli utenti CRUD:
+        //routes per gli utenti CRUD: 
         Route::post('/utenti', [UserControllerAdmin::class, 'store'])->name('utenti.store');
         Route::get('/utenti', [UserControllerAdmin::class, 'index'])->name('utenti.index');
         Route::put('/utenti/{user}', [UserControllerAdmin::class, 'update'])->name('utenti.update');
@@ -25,11 +25,9 @@ Route::middleware(['controlloSessione'])->group(function () {
 
         //routes per le statistiche
         Route::prefix('statistiche')->group(function () {
-            Route::get('/taglio', [StatisticheController::class, 'taglio'])->name(('statistiche.taglio'));
-            Route::get('/piega', [StatisticheController::class, 'piega'])->name(('statistiche.piega'));
-            Route::get('/raccolta', [StatisticheController::class, 'raccolta'])->name(('statistiche.raccolta'));
-            Route::get('/cucitura', [StatisticheController::class, 'cucitura'])->name(('statistiche.cucitura'));
-            Route::get('/brossura', [StatisticheController::class, 'brossura'])->name(('statistiche.brossura'));
+            Route::get('/fasi', [StatisticheController::class, 'genera_report_fasi'])->name(('statistiche.fasi'));
+            Route::get('/orari', [StatisticheController::class, 'genera_report_orari'])->name(('statistiche.fasi'));
+
         });
     });
 

@@ -17,6 +17,11 @@
             rel="stylesheet">
         <!-- Stili personalizzati per questo template-->
         <link href="{{ asset('admin_assets/css/sb-admin-2.min.css') }}" rel="stylesheet">
+
+
+        <!-- per il date range picker -->
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
     </head>
 
     <body id="pagina-inizio">
@@ -132,42 +137,91 @@
             </div>
         </div>
 
-        <!-- Bootstrap core JavaScript-->
-        <script src="{{ asset('admin_assets/vendor/jquery/jquery.min.js') }}"></script>
-        <script src="{{ asset('admin_assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+            {{-- <!-- Bootstrap core JavaScript-->
+            <script src="{{ asset('admin_assets/vendor/jquery/jquery.min.js') }}"></script>
+            <script src="{{ asset('admin_assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
-        <!-- Plugin core JavaScript-->
-        <script src="{{ asset('admin_assets/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
+            <!-- Plugin core JavaScript-->
+            <script src="{{ asset('admin_assets/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
 
-        <!-- Script personalizzati per tutte le pagine-->
-        <script src="{{ asset('admin_assets/js/sb-admin-2.min.js') }}"></script>
+            <!-- Script personalizzati per tutte le pagine-->
+            <script src="{{ asset('admin_assets/js/sb-admin-2.min.js') }}"></script>
 
-        <!-- Plugin per le pagine -->
-        <script src="{{ asset('admin_assets/vendor/chart.js/Chart.min.js') }}"></script>
+            <!-- Plugin per le pagine -->
+            <script src="{{ asset('admin_assets/vendor/chart.js/Chart.min.js') }}"></script>
 
-        <!-- Script personalizzati per le pagine -->
-        <script src="{{ asset('admin_assets/js/demo/chart-area-demo.js') }}"></script>
-        <script src="{{ asset('admin_assets/js/demo/chart-pie-demo.js') }}"></script>
+            <!-- Script personalizzati per le pagine -->
+            <script src="{{ asset('admin_assets/js/demo/chart-area-demo.js') }}"></script>
+            <script src="{{ asset('admin_assets/js/demo/chart-pie-demo.js') }}"></script>
 
-        <!-- DataTables core -->
-        <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-        <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap4.min.js"></script>
+            <!-- DataTables core -->
+            <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+            <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap4.min.js"></script>
 
-        <!-- DataTables Buttons -->
-        <script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
-        <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.bootstrap4.min.js"></script>
-        <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
-        <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script>
-        <!-- Per Excel -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+            <!-- DataTables Buttons -->
+            <script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
+            <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.bootstrap4.min.js"></script>
+            <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
+            <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script>
+            <!-- Per Excel -->
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 
-        <!-- Per PDF -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+            <!-- Per PDF -->
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
 
-        <script src="{{ asset('js/datatable-generic.js') }}"></script>
+            <script src="{{ asset('js/datatable-generic.js') }}"></script>
 
-        @yield('scripts_pagine_secondarie')
+
+            <!-- JS per il date range picker -->
+            <script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/min/moment.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/moment/locale/it.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script> --}}
+
+            <!-- jQuery -->
+            <script src="{{ asset('admin_assets/vendor/jquery/jquery.min.js') }}"></script>
+
+            <!-- Bootstrap Bundle (include Popper) -->
+            <script src="{{ asset('admin_assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+
+            <!-- jQuery Easing -->
+            <script src="{{ asset('admin_assets/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
+
+            <!-- Moment.js + lingua italiana (per daterangepicker) -->
+            <script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/min/moment.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/moment/locale/it.js"></script>
+
+            <!-- Daterangepicker -->
+            <script src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+
+            <!-- Chart.js -->
+            <script src="{{ asset('admin_assets/vendor/chart.js/Chart.min.js') }}"></script>
+            <script src="{{ asset('admin_assets/js/demo/chart-area-demo.js') }}"></script>
+            <script src="{{ asset('admin_assets/js/demo/chart-pie-demo.js') }}"></script>
+
+            <!-- DataTables Core -->
+            <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+            <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap4.min.js"></script>
+
+            <!-- DataTables Buttonis -->
+            <script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
+            <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.bootstrap4.min.js"></script>
+            <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
+            <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script>
+
+            <!-- per Excel e PDF -->
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+
+            <!-- Script personalizzati generici -->
+            <script src="{{ asset('js/datatable-generic.js') }}"></script>
+
+            <!-- Script admin personalizzati -->
+            <script src="{{ asset('admin_assets/js/sb-admin-2.min.js') }}"></script>
+
+            <!-- script personalizzati per le pagine secondarie -->          
+            @yield('scripts_pagine_secondarie')
     </body>
 
 </html>

@@ -1,7 +1,7 @@
-console.log('Debug: DataTable inizializzato!!!');
+console.log('Debug: DataTable inizializzato');
 
 $(document).ready(function() {
-    
+
 
     //qui impostiamo una barra di ricerca per ogni colonna
     $('#datatable-generic thead th').each(function (i) {
