@@ -88,6 +88,7 @@ class StatisticheController extends Controller
 
 
     public function genera_report_orari(Request $request){
+        #TODO
 
     }
 
