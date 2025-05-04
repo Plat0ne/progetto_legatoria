@@ -3,9 +3,18 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\{AuthenticationController, DashboardController, UserControllerAdmin, StatisticheController};
 use App\Http\Controllers\Admin\{LavorazioniTaglioController, LavorazioniBrossuraController, LavorazioniCucituraController, LavorazioniRaccoltaController, LavorazioniPiegaController};
-use App\Http\Controllers\{WelcomeController, WorkerController};
+use App\Http\Controllers\{WelcomeController, WorkerController, ProduzioneController};
 
 Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
+
+Route::prefix('produzione')->name('produzione.')->group(function () {
+    Route::get('/home', [ProduzioneController::class, 'home'])->name('home');
+    Route::get('/taglio', [ProduzioneController::class, 'taglio'])->name('taglio');
+    Route::get('/piega', [ProduzioneController::class, 'piega'])->name('piega');
+    Route::get('/raccolta', [ProduzioneController::class, 'raccolta'])->name('raccolta');
+    Route::get('/cucitura', [ProduzioneController::class, 'cucitura'])->name('cucitura');
+    Route::get('/brossura', [ProduzioneController::class, 'brossura'])->name('brossura');
+});
 
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/login', [AuthenticationController::class, 'ottineni_pagina_login'])->name('login');
@@ -26,7 +35,7 @@ Route::middleware(['controlloSessione'])->group(function () {
         //routes per le statistiche
         Route::prefix('statistiche')->group(function () {
             Route::get('/fasi', [StatisticheController::class, 'genera_report_fasi'])->name(('statistiche.fasi'));
-            Route::get('/orari', [StatisticheController::class, 'genera_report_orari'])->name(('statistiche.fasi'));
+            Route::get('/orari', [StatisticheController::class, 'genera_report_orari'])->name(('statistiche.orari'));
 
         });
     });
@@ -37,12 +46,13 @@ Route::middleware(['controlloSessione'])->group(function () {
     Route::put("/operatori/{worker}", [WorkerController::class, 'update'])->name('operatori.update');
     Route::delete("/operatori/{worker}", [WorkerController::class, 'destroy'])->name('operatori.destroy');
 
-    //routes per le lavorazioni:
-    Route::get("lavorazioni/taglio", [LavorazioniTaglioController::class, 'index'])->name('lavorazioni_taglio.index');
-    Route::get("lavorazioni/piega", [LavorazioniPiegaController::class, 'index'])->name('lavorazioni_piega.index');
-    Route::get("lavorazioni/raccolta", [LavorazioniRaccoltaController::class, 'index'])->name('lavorazioni_raccolta.index');
-    Route::get("lavorazioni/cucitura", [LavorazioniCucituraController::class, 'index'])->name('lavorazioni_cucitura.index');
-    Route::get("lavorazioni/brossura", [LavorazioniBrossuraController::class, 'index'])->name('lavorazioni_brossura.index');
+    Route::prefix('lavorazioni')->name('lavorazioni.')->group(function () {
+        Route::get('/taglio', [LavorazioniTaglioController::class, 'index'])->name('taglio');
+        Route::get('/piega', [LavorazioniPiegaController::class, 'index'])->name('piega');
+        Route::get('/raccolta', [LavorazioniRaccoltaController::class, 'index'])->name('raccolta');
+        Route::get('/cucitura', [LavorazioniCucituraController::class, 'index'])->name('cucitura');
+        Route::get('/brossura', [LavorazioniBrossuraController::class, 'index'])->name('brossura');
+    });
 
 });
 

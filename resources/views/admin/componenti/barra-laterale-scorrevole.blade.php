@@ -40,11 +40,11 @@
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="py-2 collapse-inner rounded bg-info">
                 <h6 class="collapse-header text-white">Tempi lavorazione fasi:</h6>
-                <a class="collapse-item" href="{{ route('lavorazioni_taglio.index') }}"><i class="fas fa-fw fa-cut"></i> Taglio</a>
-                <a class="collapse-item" href="{{ route('lavorazioni_piega.index') }}"><i class="fas fa-fw fa-layer-group"></i> Piega</a>
-                <a class="collapse-item" href="{{ route('lavorazioni_raccolta.index') }}"><i class="fas fa-fw fa-people-carry"></i> Raccolta</a>
-                <a class="collapse-item" href="{{ route('lavorazioni_cucitura.index') }}"><i class="fas fa-dot-circle"></i> Cucitura</a>
-                <a class="collapse-item" href="{{ route('lavorazioni_brossura.index') }}"><i class="fas fa-book-open"></i> Brossura</a>
+                <a class="collapse-item" href="{{ route('lavorazioni.taglio') }}"><i class="fas fa-fw fa-cut"></i> Taglio</a>
+                <a class="collapse-item" href="{{ route('lavorazioni.piega') }}"><i class="fas fa-fw fa-layer-group"></i> Piega</a>
+                <a class="collapse-item" href="{{ route('lavorazioni.raccolta') }}"><i class="fas fa-fw fa-people-carry"></i> Raccolta</a>
+                <a class="collapse-item" href="{{ route('lavorazioni.cucitura') }}"><i class="fas fa-dot-circle"></i> Cucitura</a>
+                <a class="collapse-item" href="{{ route('lavorazioni.brossura') }}"><i class="fas fa-book-open"></i> Brossura</a>
                 
             </div>
         </div>
@@ -62,7 +62,7 @@
             <div class="bg-white py-2 collapse-inner">
                 <h6 class="collapse-header">Monitoring Azienda:</h6>
                 <a class="collapse-item" href="{{ route('admin.statistiche.fasi') }}">Statistiche Fasi</a>
-                <a class="collapse-item" href="{{ route('admin.dashboard') }}">Orari operatori</a>
+                <a class="collapse-item" href="{{ route('admin.statistiche.orari') }}">Orari operatori</a>
             </div>
         </div>
     </li>

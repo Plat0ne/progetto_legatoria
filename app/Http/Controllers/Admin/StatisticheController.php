@@ -9,6 +9,7 @@ use App\Models\LavorazioniCucitura;
 use App\Models\LavorazioniBrossura;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class StatisticheController extends Controller
 {
@@ -88,7 +89,111 @@ class StatisticheController extends Controller
 
 
     public function genera_report_orari(Request $request){
-        #TODO
+        $range = $request->input('daterange');
+
+        if (!$range) {
+            $data_inizio = now()->startOfYear()->toDateString();
+            $data_fine = now()->endOfYear()->toDateString();
+        } else {
+            [$start, $end] = explode(' - ', $range);
+            $data_inizio = date('Y-m-d', strtotime(str_replace('/', '-', $start)));
+            $data_fine = date('Y-m-d', strtotime(str_replace('/', '-', $end)));
+        }
+
+        if (strtotime($data_fine) < strtotime($data_inizio)) {
+            return redirect()->back()->withErrors(['Le date selezionate non sono valide']);
+        }
+
+
+        $result = DB::select("
+            SELECT
+                operatore_data.codice_operatore,
+                operatore_data.data_lavorazione,
+                COALESCE(SUM(taglio.durata_secondi), 0) AS tempo_taglio,
+                COALESCE(SUM(piegatura.durata_secondi), 0) AS tempo_piegatura,
+                COALESCE(SUM(raccolta.durata_secondi), 0) AS tempo_raccolta,
+                COALESCE(SUM(cucitura.durata_secondi), 0) AS tempo_cucitura,
+                COALESCE(SUM(brossura.durata_secondi), 0) AS tempo_brossura
+            FROM (
+                SELECT DISTINCT
+                    codice_operatore,
+                    DATE(timestamp_inizio) AS data_lavorazione
+                FROM (
+                    SELECT codice_operatore, timestamp_inizio FROM lavorazioni_taglio
+                    UNION ALL
+                    SELECT codice_operatore, timestamp_inizio FROM lavorazioni_piegatura
+                    UNION ALL
+                    SELECT codice_operatore, timestamp_inizio FROM lavorazioni_raccolta
+                    UNION ALL
+                    SELECT codice_operatore, timestamp_inizio FROM lavorazioni_cucitura
+                    UNION ALL
+                    SELECT codice_operatore, timestamp_inizio FROM lavorazioni_brossura
+                ) AS tutte_lavorazioni
+                WHERE timestamp_inizio BETWEEN ? AND ?
+            ) AS operatore_data
+            LEFT JOIN (
+                SELECT codice_operatore, DATE(timestamp_inizio) AS data_lavorazione,
+                    SUM(TIMESTAMPDIFF(SECOND, timestamp_inizio, timestamp_fine)) AS durata_secondi
+                FROM lavorazioni_taglio
+                WHERE timestamp_inizio BETWEEN ? AND ?
+                GROUP BY codice_operatore, DATE(timestamp_inizio)
+            ) AS taglio
+            ON taglio.codice_operatore = operatore_data.codice_operatore AND taglio.data_lavorazione = operatore_data.data_lavorazione
+            LEFT JOIN (
+                SELECT codice_operatore, DATE(timestamp_inizio) AS data_lavorazione,
+                    SUM(TIMESTAMPDIFF(SECOND, timestamp_inizio, timestamp_fine)) AS durata_secondi
+                FROM lavorazioni_piegatura
+                WHERE timestamp_inizio BETWEEN ? AND ?
+                GROUP BY codice_operatore, DATE(timestamp_inizio)
+            ) AS piegatura
+            ON piegatura.codice_operatore = operatore_data.codice_operatore AND piegatura.data_lavorazione = operatore_data.data_lavorazione
+            LEFT JOIN (
+                SELECT codice_operatore, DATE(timestamp_inizio) AS data_lavorazione,
+                    SUM(TIMESTAMPDIFF(SECOND, timestamp_inizio, timestamp_fine)) AS durata_secondi
+                FROM lavorazioni_raccolta
+                WHERE timestamp_inizio BETWEEN ? AND ?
+                GROUP BY codice_operatore, DATE(timestamp_inizio)
+            ) AS raccolta
+            ON raccolta.codice_operatore = operatore_data.codice_operatore AND raccolta.data_lavorazione = operatore_data.data_lavorazione
+            LEFT JOIN (
+                SELECT codice_operatore, DATE(timestamp_inizio) AS data_lavorazione,
+                    SUM(TIMESTAMPDIFF(SECOND, timestamp_inizio, timestamp_fine)) AS durata_secondi
+                FROM lavorazioni_cucitura
+                WHERE timestamp_inizio BETWEEN ? AND ?
+                GROUP BY codice_operatore, DATE(timestamp_inizio)
+            ) AS cucitura
+            ON cucitura.codice_operatore = operatore_data.codice_operatore AND cucitura.data_lavorazione = operatore_data.data_lavorazione
+            LEFT JOIN (
+                SELECT codice_operatore, DATE(timestamp_inizio) AS data_lavorazione,
+                    SUM(TIMESTAMPDIFF(SECOND, timestamp_inizio, timestamp_fine)) AS durata_secondi
+                FROM lavorazioni_brossura
+                WHERE timestamp_inizio BETWEEN ? AND ?
+                GROUP BY codice_operatore, DATE(timestamp_inizio)
+            ) AS brossura
+            ON brossura.codice_operatore = operatore_data.codice_operatore AND brossura.data_lavorazione = operatore_data.data_lavorazione
+            GROUP BY operatore_data.codice_operatore, operatore_data.data_lavorazione
+            ORDER BY operatore_data.codice_operatore, operatore_data.data_lavorazione
+        ", [
+            $data_inizio, $data_fine,  // prima sottoquery
+            $data_inizio, $data_fine,  // taglio
+            $data_inizio, $data_fine,  // piegatura
+            $data_inizio, $data_fine,  // raccolta
+            $data_inizio, $data_fine,  // cucitura
+            $data_inizio, $data_fine,  // brossura
+        ]);
+
+
+        $data_inizio=date('d/m/Y',strtotime($data_inizio));
+        $data_fine=date('d/m/Y',strtotime($data_fine));
+
+        return view('admin.statistiche.orari', [
+            'title' => "Orari Operatori ( $data_inizio - $data_fine )",
+            'orari' => $result,
+            'data_inizio' => $data_inizio,
+            'data_fine' => $data_fine
+        ]);
+
+        
 
     }
 

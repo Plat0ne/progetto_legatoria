@@ -12,7 +12,6 @@
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-
     <style>
         body {
             height: 100vh;
@@ -61,9 +60,11 @@
             font-weight: bold;
             text-align: right;
         }
+
     </style>
 </head>
 <body style="background: url('{{ asset('admin_assets/img/login_background.jpg') }}') no-repeat center center fixed; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;">
+
 
     <div id="alerts" style="position: fixed; top: 0; left: 0; right: 100; z-index: 9999;">
         @if (session('success'))
@@ -80,8 +81,11 @@
         @endif
     </div>
 
-    <div class="clock-container">
+    <div class="clock-container d-lg-block">
         <span id="clock"></span>
+    </div>
+    <div style="position: fixed; top: 0; left: 0;" class="d-lg-block">
+        <a href="{{ route('produzione.home') }}" class="btn btn-success mt-3 m">Produzione</a>
     </div>
 
     <div id="welcome_box" class="welcome-box">
@@ -125,9 +129,7 @@
         </div>
     </div>
 
-
     <script>
-
         const alerts = document.getElementById('alerts');
         setTimeout(() => {
             alerts.style.transition = "opacity 1s";
@@ -169,7 +171,7 @@
                 if (response.ok && data.success) {
                     window.location.reload();
                 } else {
-                    // ostriamo messaggio di errore
+                    // Mostra messaggio di errore
                     errorDiv.classList.remove('d-none');
                     errorDiv.textContent = data.message || "Login fallito";
                 }
@@ -180,7 +182,6 @@
                 console.error("Errore AJAX:", err);
             }
         }
-        
 
         function updateTime() {
             const date = new Date();
@@ -208,6 +209,4 @@
 </footer>
 <!-- Fine del footer -->
 </html>
-
-
 
