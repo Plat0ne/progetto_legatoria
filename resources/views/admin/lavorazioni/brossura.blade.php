@@ -35,9 +35,8 @@
                         <td>{{ $lavorazione->codice_operatore }}</td>
                         <td>{{ $lavorazione->codice_commessa }}</td>
                         <td>{{ $lavorazione->codice_macchina }}</td>
-                        <td>{{ \Carbon\Carbon::parse($lavorazione->timestamp_inizio)->format('d/m/Y H:i') }}</td>
-                        <td>{{ \Carbon\Carbon::parse($lavorazione->timestamp_fine)->format('d/m/Y H:i') }}</td>
-                        
+                        <td>{{ $lavorazione->timestamp_inizio ? \Carbon\Carbon::parse($lavorazione->timestamp_inizio)->format('d/m/Y H:i') : $lavorazione->timestamp_inizio }}</td>
+                        <td>{{ $lavorazione->timestamp_fine ? \Carbon\Carbon::parse($lavorazione->timestamp_fine)->format('d/m/Y H:i') : $lavorazione->timestamp_fine }}</td>
                     </tr>
                     @endforeach
                 </tbody>

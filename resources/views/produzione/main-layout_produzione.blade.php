@@ -27,85 +27,84 @@
         </style>
     </head>
 
-    <body id="pagina-inizio">
-         <!-- Wrapper della pagina -->
-
+    <body id="pagina-inizio" class="bg-success">
+        <!-- Wrapper della pagina -->
         
-        <div id="" class="bg-success">
-                <!-- Inizio del contenuto principale -->
-                <div class="container-fluid">
-                    <div class="clock-container d-lg-block text-white mr-3">
-                        <span id="clock"></span>
-                    </div>
-                    <h1 class="mb-4 text-white">
-                        <strong>
-                            @yield('icon')
-                            {{ $title }}
-                        </strong>
-                    </h1>
-
-                    @if (Route::currentRouteName() != 'produzione.home')
-                        <div class="d-flex justify-content-center">
-                            <a href="{{ route('produzione.home') }}" class="btn btn-light btn-lg mb-3">
-                                <i class="fas fa-home"></i>
-                            </a>
-                        </div>
-                    @endif
-
-                    <hr style="border-color: white; border-width: 3px;">
-
-                    @yield('main')
-
+        <div id="" class="">
+            <!-- Inizio del contenuto principale -->
+            <div class="container-fluid">
+                <div class="clock-container d-lg-block text-dark mr-3">
+                    <span id="clock" style="text-shadow: -2px 0 white, 0 2px white, 2px 0 white, 0 -2px white;"></span>
                 </div>
-                <!-- Fine del contenuto principale -->
+                <h1 class="mb-4 text-dark" style="text-shadow: -2px 0 white, 0 2px white, 2px 0 white, 0 -2px white;">
+                    <strong>
+                        @yield('icon')
+                        {{ $title }}
+                    </strong>
+                </h1>
 
-                <!-- Footer -->
-                <footer class="sticky-footer">
-                    <div class="container my-auto">
-                        <div class="copyright text-center my-auto text-white">
-                            <span>App Bind it, copyright 2025</span>
-                        </div>
+                @if (Route::currentRouteName() != 'produzione.home')
+                    <div class="d-flex justify-content-center">
+                        <a href="{{ route('produzione.home') }}" class="btn btn-light btn-lg mb-3">
+                            <i class="fas fa-home"></i>
+                        </a>
                     </div>
-                </footer>
-                <!-- Fine del footer -->
+                @endif
+
+                <hr style="border-color: white; border-width: 3px;">
+
+                @yield('main')
+
             </div>
-            <!-- Fine del wrapper del contenuto -->
+            <!-- Fine del contenuto principale -->
 
-            <!-- Pulsante per tornare in alto -->
-            <a class="scroll-to-top rounded" href="#pagina-inizio">
-                <i class="fas fa-angle-up"></i>
-            </a>
-            <!-- jQuery -->
-            <script src="{{ asset('admin_assets/vendor/jquery/jquery.min.js') }}"></script>
+            <!-- Footer -->
+            <footer class="sticky-footer">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto text-white">
+                        <span>App Bind it, copyright 2025</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- Fine del footer -->
+        </div>
+        <!-- Fine del wrapper del contenuto -->
 
-            <!-- Bootstrap Bundle (include Popper) -->
-            <script src="{{ asset('admin_assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+        <!-- Pulsante per tornare in alto -->
+        <a class="scroll-to-top rounded" href="#pagina-inizio">
+            <i class="fas fa-angle-up"></i>
+        </a>
+        <!-- jQuery -->
+        <script src="{{ asset('admin_assets/vendor/jquery/jquery.min.js') }}"></script>
 
-            <!-- jQuery Easing -->
-            <script src="{{ asset('admin_assets/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
+        <!-- Bootstrap Bundle (include Popper) -->
+        <script src="{{ asset('admin_assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
-            <!-- Moment.js + lingua italiana (per daterangepicker) -->
-            <script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/min/moment.min.js"></script>
-            <script src="https://cdn.jsdelivr.net/npm/moment/locale/it.js"></script>
+        <!-- jQuery Easing -->
+        <script src="{{ asset('admin_assets/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
 
-            <!-- Script admin personalizzati -->
-            <script src="{{ asset('admin_assets/js/sb-admin-2.min.js') }}"></script>
+        <!-- Moment.js + lingua italiana (per daterangepicker) -->
+        <script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/min/moment.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/moment/locale/it.js"></script>
 
-            <!-- script personalizzati per le pagine secondarie -->          
-            @yield('scripts_pagine_secondarie')
+        <!-- Script admin personalizzati -->
+        <script src="{{ asset('admin_assets/js/sb-admin-2.min.js') }}"></script>
 
-            <script>
-                function updateTime() {
-                    const date = new Date();
-                    const hours = date.getHours();
-                    const minutes = date.getMinutes();
-                    const seconds = date.getSeconds();
-                    const time = `${hours < 10 ? '0' + hours : hours}:${minutes < 10 ? '0' + minutes : minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
-                    document.getElementById('clock').innerHTML = time;
-                }
-                setInterval(updateTime, 1000);
-                updateTime();
-            </script>
+        <!-- script personalizzati per le pagine secondarie -->          
+        @yield('scripts_pagine_secondarie')
+
+        <script>
+            function updateTime() {
+                const date = new Date();
+                const hours = date.getHours();
+                const minutes = date.getMinutes();
+                const seconds = date.getSeconds();
+                const time = `${hours < 10 ? '0' + hours : hours}:${minutes < 10 ? '0' + minutes : minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
+                document.getElementById('clock').innerHTML = time;
+            }
+            setInterval(updateTime, 1000);
+            updateTime();
+        </script>
     </body>
 
 </html>

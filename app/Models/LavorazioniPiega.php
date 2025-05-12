@@ -16,6 +16,8 @@ class LavorazioniPiega extends Model
     protected $primaryKey = 'id_lp';
     public $incrementing = true;
     protected $keyType = 'int';
+    public $timestamps = false;
+
 
     protected $fillable = [
         'fase_id',

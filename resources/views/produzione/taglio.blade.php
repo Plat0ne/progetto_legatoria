@@ -6,11 +6,11 @@
 
 @section('main')
 
-    <div class="container-fluid mt-1 h-100">
+    <div class="container-fluid">
 
         <div id="lavorazioniContainer">
             @foreach($lavorazioni as $l)
-                <div id="carta_lavorazione" class="card lavorazione-item" data-seriale="{{ strtolower($l['id_lavorazione']) }}">
+                <div id="carta_lavorazione_{{ strtolower($l['id_lavorazione']) }}" class="card lavorazione-item">
                     <div class="card-body">
                         <div class="row mb-2 justify-content-center">
                             <div class="col">
@@ -41,30 +41,172 @@
             @endforeach
         </div>
 
-        @include('produzione.modals.modal_uscita')
+        @include('produzione.modals.modal_uscita_taglio')
+        @include('produzione.modals.modal_entrata_taglio')
 
         <div class="fixed-bottom p-2">
             <div class="btn-xxl">
-                <a href="{{ route('produzione.home') }}" class="btn btn-info d-flex align-items-center justify-content-center" style="width: 100%; height: 60px;  font-size: 2.5rem; ">ENTRA</a>
+                <button type="button" class="btn btn-primary w-100" data-toggle="modal" data-target="#modal_entrata">
+                    <i class="fas fa-sign-in-alt"></i>&nbsp;ENTRA
+                </button>
+            
             </div>
         </div>
     </div>
 
 @endsection
 
+
 @section('scripts_pagine_secondarie')
 <script>
-    function init_modal_fine(id_lavorazione, codice_operatore){
-        //impostiamo il titolo alla modal:
-        document.getElementById('uscitaModalLabel').innerHTML = codice_operatore + ", sei sicuro di terminare questa lavorazione?";
-        //impostiamo l' id_lavorazione:
-        document.getElementById('id_lavorazione').value = id_lavorazione;
 
-        //apriamola modal
-        var myModal = document.getElementById('modal_uscita');
-        var modal = new bootstrap.Modal(myModal);
-        modal.show();
-    }    
-</script>    
+    //scrpit per la parte uscita __________________________________________
+
+    let modalInstance = null;
+
+    function init_modal_fine(id_lavorazione, codice_operatore) {
+        document.getElementById('uscitaModalLabel').innerHTML = codice_operatore + ", sei sicuro di terminare questa lavorazione?";
+        document.getElementById('id_lavorazione').value = id_lavorazione;
+        document.getElementById('fogli_lavorati').value = '';
+
+
+        var modale = document.getElementById('modal_uscita');
+        modalInstance = new bootstrap.Modal(modale); // assegna all'istanza globale
+        modalInstance.show();
+    }
+
+    $(document).ready(function() {
+        document.querySelectorAll('.bottone_esci').forEach(function(button) {
+            button.addEventListener('click', function() {
+                const data = this.getAttribute('data-id');
+                popolaFormEdit(JSON.parse(data));
+            });
+        });
+
+        $('#bottone_esci').on('click', function(e) {
+            e.preventDefault();
+            var fogli_lavorati = $('#fogli_lavorati').val();
+            var id_lavorazione = $('#id_lavorazione').val();
+            var error_msg = $('#error_msg_uscita');
+
+            error_msg.html('');
+            $('#fogli_lavorati').removeClass('text-danger');
+
+            if (isNaN(fogli_lavorati) || fogli_lavorati <= 0) {
+                $('#fogli_lavorati').addClass('text-danger');
+                error_msg.html('Inserire un valore numerico maggiore di zero');
+                return;
+            }
+
+            $.ajax({
+                type: 'POST',
+                url: '/produzione/taglio/uscita/' + id_lavorazione,
+                data: {
+                    '_token': '{{ csrf_token() }}',
+                    'fogli_lavorati': fogli_lavorati,
+                    'id_lavorazione': id_lavorazione
+                },
+                success: function(response) {
+                    if (modalInstance) {
+                        modalInstance.hide(); // chiudo quell' istanza che era blobale
+                    }
+                    $('#carta_lavorazione_' + id_lavorazione.toLowerCase()).remove();
+                },
+                error: function(xhr) {
+                    var errors = xhr.responseJSON.errors;
+                    $.each(errors, function(index, value) {
+                        console.log(value);
+                        error_msg.append(value + '<br>');
+                    });
+                    error_msg.addClass('text-danger');
+                   
+                }
+            });
+        });
+
+    //scrpit per la parte entrata __________________________________________
+
+        $('#bottone_inizia').on('click', function(event) {
+            event.preventDefault();
+
+            var codice_commessa = $('#codice_commessa').val();
+            var quantita_fogli = $('#quantita_fogli').val();
+            var codice_macchina = $('#codice_macchina').val();
+            var codice_operatore = $('#codice_operatore').val();
+            var inizio_segnatura = $('#inizio_segnatura').val();
+            var fine_segnatura = $('#fine_segnatura').val();
+            var error_msg = $('#error_msg_entrata');
+
+            error_msg.html('');
+            $('#form_entrata input').removeClass('text-danger');
+
+            if (!codice_commessa || isNaN(quantita_fogli) || quantita_fogli <= 0 || !codice_macchina || !codice_operatore || isNaN(inizio_segnatura) || !fine_segnatura) {
+                var messaggi_errore = [];
+                if (!codice_commessa) {
+                    messaggi_errore.push('Inserire il codice della commessa');
+                }
+                if (isNaN(quantita_fogli) || quantita_fogli <= 0) {
+                    messaggi_errore.push('Inserire un numero di fogli maggiore di zero');
+                }
+                if (!codice_macchina) {
+                    messaggi_errore.push('Inserire il codice della macchina');
+                }
+                if (!codice_operatore) {
+                    messaggi_errore.push('Inserire il codice dell\'operatore');
+                }
+                if (isNaN(inizio_segnatura)) {
+                    messaggi_errore.push('Inserire un numero per la segnatura iniziale');
+                }
+                if (!fine_segnatura) {
+                    messaggi_errore.push('Inserire un numero per la segnatura finale');
+                }
+                if (messaggi_errore.length > 0) {
+                    messaggi_errore.forEach(function(messaggio) {
+                        error_msg.append(messaggio + '<br>');
+                    });
+                    $('#form_entrata input').addClass('text-danger');
+                    return;
+                }
+            }
+
+            $.ajax({
+                type: 'POST',
+                url: '/produzione/taglio/entrata',
+                data: {
+                    '_token': '{{ csrf_token() }}',
+                    'codice_commessa': codice_commessa,
+                    'quantita_fogli': quantita_fogli,
+                    'codice_macchina': codice_macchina,
+                    'codice_operatore': codice_operatore,
+                    'inizio_segnatura': inizio_segnatura,
+                    'fine_segnatura': fine_segnatura
+                },
+                success: function(response){
+                    if (response.success === true) {
+                        if (modalInstance) {
+                            modalInstance.hide(); // chiudo quell' istanza che era blobale
+                            location.reload();
+                        }
+                        $('#carta_lavorazione_' + id_lavorazione.toLowerCase()).remove();
+                    } else {
+                        var error = response;
+                        console.log(error.message);
+                        error_msg.html(error.message);
+                        error_msg.addClass('text-danger');
+                    }
+                },
+                error: function(xhr) {
+                    var errors = xhr.responseJSON.message;
+                    error_msg.append(errors + '<br>');
+                    error_msg.addClass('text-danger'); 
+                }
+            });
+
+            
+        });
+    });
+</script>
 
 @endsection
+
+

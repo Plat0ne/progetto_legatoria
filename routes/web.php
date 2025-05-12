@@ -9,18 +9,28 @@ Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
 
 Route::prefix('produzione')->name('produzione.')->group(function () {
     Route::get('/home', [ProduzioneController::class, 'home'])->name('home');
+
+    #Routes produzione Taglio
     Route::get('/taglio', [ProduzioneController::class, 'taglio'])->name('taglio');
+    Route::post('/taglio/entrata',[ProduzioneController::class, 'entrata_taglio'])->name('taglio.entrata'); //praticamente una store
+    Route::post('/taglio/uscita/{id_lavorazione}',[ProduzioneController::class, 'uscita_taglio'])->name('taglio.uscita'); //praticamente un update
+    #Routes produzione Piega
     Route::get('/piega', [ProduzioneController::class, 'piega'])->name('piega');
+    Route::post('/piega/entrata',[ProduzioneController::class, 'entrata_piega'])->name('piega.entrata');
+    Route::post('/piega/uscita/{id_lavorazione}',[ProduzioneController::class, 'uscita_piega'])->name('piega.uscita');
+
     Route::get('/raccolta', [ProduzioneController::class, 'raccolta'])->name('raccolta');
     Route::get('/cucitura', [ProduzioneController::class, 'cucitura'])->name('cucitura');
     Route::get('/brossura', [ProduzioneController::class, 'brossura'])->name('brossura');
 });
+
 
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/login', [AuthenticationController::class, 'ottineni_pagina_login'])->name('login');
     Route::post('/login', [AuthenticationController::class, 'tentativoLogin'])->name('tentativoLogin');
     Route::post('/logout', [AuthenticationController::class, 'logout'])->name('logout');
 });
+
 
 Route::middleware(['controlloSessione'])->group(function () {
     Route::prefix('admin')->name('admin.')->group(function () {
@@ -40,6 +50,7 @@ Route::middleware(['controlloSessione'])->group(function () {
         });
     });
 
+    
     //routes per gli operatori CRUD:
     Route::post("/operatori", [WorkerController::class, 'store'])->name('operatori.store');
     Route::get("/operatori", [WorkerController::class, 'index'])->name('operatori.index');
@@ -53,9 +64,7 @@ Route::middleware(['controlloSessione'])->group(function () {
         Route::get('/cucitura', [LavorazioniCucituraController::class, 'index'])->name('cucitura');
         Route::get('/brossura', [LavorazioniBrossuraController::class, 'index'])->name('brossura');
     });
-
 });
-
 
 
 Route::fallback(function () {

@@ -12,13 +12,13 @@
 				</div>
 				<div class="row mb-5">
 					<div class="col">
-						<form id="form_finale" action="" method="post">
+						<form id="form_uscita">
 							<input type="hidden" id=id_lavorazione name="id_lavorazione" value="">
 
 							<div class="row mb-3">
-								<input type="number" class="form-control" id="minuti_rilavorazione" name="minuti_rilavorazione" placeholder="numero contatore fogli lavorati (macchina)" style="background-color: #f5f5f5;">
+								<input type="number" class="form-control" id="fogli_lavorati" name="fogli_lavorati" placeholder="numero contatore fogli lavorati (macchina)" style="background-color: #f5f5f5;">
 							</div>
-							
+							<div id="error_msg_uscita" class="text-danger"></div>
 							<div class="d-grid">
 								<button class="btn btn-danger btn-lg" id="bottone_esci">ESCI</button>
 							</div>

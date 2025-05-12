@@ -45,8 +45,8 @@
                         <td>{{ $lavorazione->segnatura_finita }}</td>
                         <td>{{ $lavorazione->n_colpi_start }}</td>
                         <td>{{ $lavorazione->n_colpi_end }}</td>
-                        <td>{{ \Carbon\Carbon::parse($lavorazione->timestamp_inizio)->format('d/m/Y H:i') }}</td>
-                        <td>{{ \Carbon\Carbon::parse($lavorazione->timestamp_fine)->format('d/m/Y H:i') }}</td>
+                        <td>{{ $lavorazione->timestamp_inizio ? \Carbon\Carbon::parse($lavorazione->timestamp_inizio)->format('d/m/Y H:i') : $lavorazione->timestamp_inizio }}</td>
+                        <td>{{ $lavorazione->timestamp_fine ? \Carbon\Carbon::parse($lavorazione->timestamp_fine)->format('d/m/Y H:i') : $lavorazione->timestamp_fine }}</td>
                     </tr>
                     @endforeach
                 </tbody>

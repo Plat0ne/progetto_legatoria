@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use GuzzleHttp\Psr7\Request;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
@@ -17,6 +18,7 @@ class LavorazioniTaglio extends Model
     protected $primaryKey = 'id_lavorazione';
     public $incrementing = true;
     protected $keyType = 'int';
+    public $timestamps = false;
 
     protected $fillable = [
         'fase_id',
@@ -35,5 +37,5 @@ class LavorazioniTaglio extends Model
     public function scopeBetweenDates($query, $start_date, $end_date) {
         return $query->whereBetween('timestamp_inizio', [$start_date, $end_date]);
     }
-}
 
+}

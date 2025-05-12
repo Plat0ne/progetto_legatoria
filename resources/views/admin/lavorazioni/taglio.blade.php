@@ -19,6 +19,7 @@
             <table id="datatable-generic" class="table table-bordered table-striped table-dark" style="">
                 <thead class="thead-light">
                     <tr>
+                        <th><strong>Id</strong></th>
                         <th><strong>Timestamp Inizio</strong></th>
                         <th><strong>Timestamp Fine</strong></th>
                         <th><strong>Codice Operatore</strong></th>
@@ -32,10 +33,11 @@
                 </thead>
                 <tbody id="userTable">
                     @foreach($registrazioni_taglio as $lavorazione)
-                    <tr id="row-{{ $lavorazione->id }}">
+                    <tr id="row-{{ $lavorazione->id_lavorazione }}">
 
-                        <td>{{ \Carbon\Carbon::parse($lavorazione->timestamp_inizio)->format('d/m/Y H:i') }}</td>
-                        <td>{{ \Carbon\Carbon::parse($lavorazione->timestamp_fine)->format('d/m/Y H:i') }}</td>
+                        <td>{{ $lavorazione->id_lavorazione }}</td>
+                        <td>{{ $lavorazione->timestamp_inizio ? \Carbon\Carbon::parse($lavorazione->timestamp_inizio)->format('d/m/Y H:i') : $lavorazione->timestamp_inizio }}</td>
+                        <td>{{ $lavorazione->timestamp_fine ? \Carbon\Carbon::parse($lavorazione->timestamp_fine)->format('d/m/Y H:i') : $lavorazione->timestamp_fine }}</td>
                         <td>{{ $lavorazione->codice_operatore }}</td>
                         <td>{{ $lavorazione->codice_commessa }}</td>
                         <td>{{ $lavorazione->codice_macchina }}</td>
