@@ -19,7 +19,7 @@
             <table id="datatable-generic" class="table table-bordered table-striped table-dark" style="">
                 <thead class="thead-light">
                     <tr>
-                        <th><strong>Fase ID</strong></th>
+                        <th><strong>Id</strong></th>
                         <th><strong>Codice Operatore</strong></th>
                         <th><strong>Codice Commessa</strong></th>
                         <th><strong>Codice Macchina</strong></th>
@@ -31,7 +31,7 @@
                     @foreach($registrazioni_brossura as $lavorazione)
                     <tr id="row-{{ $lavorazione->id_lb }}">
 
-                        <td>{{ $lavorazione->fase_id }}</td>
+                        <td>{{ $lavorazione->id_lb }}</td>
                         <td>{{ $lavorazione->codice_operatore }}</td>
                         <td>{{ $lavorazione->codice_commessa }}</td>
                         <td>{{ $lavorazione->codice_macchina }}</td>

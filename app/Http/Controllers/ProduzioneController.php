@@ -104,15 +104,15 @@ class ProduzioneController extends Controller
             'copie_lavorate_fine.required' => 'Inserire il numero di fogli lavorati',
         ]);
 
-        if(!is_numeric($data->copie_lavorate_fine) || $data->copie_lavorate_fine <= 0){
-            return response()->json(['success' => false, 'message' => "Il numero di fogli lavorati deve essere maggiore di zero", 422]);
+        if(!is_numeric($data->copie_lavorate_fine) || $data->copie_lavorate_fine < 0){
+            return response()->json(['success' => false, 'message' => "Il numero di fogli lavorati deve essere positivo", 422]);
         }
 
         try {
             $lavorazione = LavorazioniPiega::find($id_lavorazione);
 
-            if(($lavorazione->n_copie_start != null) && ($lavorazione->n_copie_start < $data->copie_lavorate_fine)){
-                return response()->json(['success' => false, 'message' => "Il numero di fogli lavorati deve essere maggiore di $lavorazione->n_copie_start"], 422);
+            if(($lavorazione->n_copie_start != null) && ($lavorazione->n_copie_start > $data->copie_lavorate_fine)){
+                return response()->json(['success' => false, 'message' => "Il numero di copie lavorate ($data->copie_lavorate_fine) deve essere maggiore o uguale a $lavorazione->n_copie_start"], 422);
             }
 
             $lavorazione->timestamp_fine = now();
@@ -148,12 +148,12 @@ class ProduzioneController extends Controller
             return response()->json(['success' => false, 'message' => "operatore $data->codice_operatore non trovato", 422]);
         }
 
-        if(!is_numeric($data->n_copie_inizio) || $data->n_copie_inizio <= 0){
-            return response()->json(['success' => false, 'message' => "Il numero di copie inizio deve essere maggiore di zero", 422]);
+        if(!is_numeric($data->n_copie_inizio) || $data->n_copie_inizio < 0){
+            return response()->json(['success' => false, 'message' => "Il numero di copie inizio deve essere positivo", 422]);
         }
 
-        if(!preg_match('/^[0-9]{1,6}$/', $data->segnatura)){
-            return response()->json(['success' => false, 'message' => "La segnatura deve essere composta da 1 a 6 numeri", 422]);
+        if(!is_numeric($data->segnatura)){
+            return response()->json(['success' => false, 'message' => "La segnatura deve essere numerica", 422]);
         }
         
 
@@ -176,11 +176,55 @@ class ProduzioneController extends Controller
         
     }
 
+
+
     public function raccolta(){
         return view('produzione.raccolta',[
             'title' => 'Raccolta',
             'lavorazioni' => LavorazioniRaccolta::where('timestamp_fine', null)->get()
         ]);
+    }
+    public function entrata_raccolta(Request $data){
+        $this->validate($data, [
+            'codice_commessa' => 'required',
+            'codice_macchina' => 'required',
+            'codice_operatore' => 'required',
+        ],
+        [
+            'codice_commessa.required' => 'La commessa é obbligatoria',
+            'codice_macchina.required' => 'La macchina é obbligatoria',
+            'codice_operatore.required' => 'L\'operatore é obbligatoria',
+        ]);
+
+        $operatore = Worker::where('codice_operatore', $data->codice_operatore)->first();
+        if(!$operatore){
+            return response()->json(['success' => false, 'message' => "operatore $data->codice_operatore non trovato", 422]);
+        }
+        
+        try{
+            LavorazioniRaccolta::create([
+                'fase_id' => 3,
+                'codice_commessa' => $data->codice_commessa,
+                'codice_macchina' => $data->codice_macchina,
+                'codice_operatore' => $data->codice_operatore,
+                'timestamp_inizio' => now()
+            ]);
+            return response()->json(['success' => true, 'message' => "success created lavorazione"]);
+        }
+        catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => "error created lavorazione, error: " . $e->getMessage()], 422);
+        }
+        
+    }
+    public function uscita_raccolta($id_lavorazione){
+        try{
+            $lavorazione = LavorazioniRaccolta::find($id_lavorazione);
+            $lavorazione->timestamp_fine = now();
+            $lavorazione->save();
+            return response()->json(['success' => true, 'message' => "success modified lavorazione number $id_lavorazione"]);
+        }catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => "error modified lavorazione number, error: " . $e->getMessage()], 422);
+        }
     }
 
     public function cucitura(){
@@ -188,6 +232,74 @@ class ProduzioneController extends Controller
             'title' => 'Cucitura',
             'lavorazioni' => LavorazioniCucitura::where('timestamp_fine', null)->get()
         ]);
+    }
+    public function entrata_cucitura(Request $data){
+        $this->validate($data, [
+            'codice_commessa' => 'required',
+            'codice_macchina' => 'required',
+            'codice_operatore' => 'required',
+            'colpi_inizio' => 'required',
+            'macchina_condivisa' => 'required',
+        ],
+        [
+            'codice_commessa.required' => 'La commessa é obbligatoria',
+            'codice_macchina.required' => 'La macchina é obbligatoria',
+            'codice_operatore.required' => 'L\'operatore é obbligatoria',
+            'colpi_inizio.required' => 'Il numero di colpi inizio e\' obbligatorio',
+            'macchina_condivisa.required' => 'La macchina condivisa e\' obbligatoria',
+        ]);
+
+        $operatore = Worker::where('codice_operatore', $data->codice_operatore)->first();
+        if(!$operatore){
+            return response()->json(['success' => false, 'message' => "operatore $data->codice_operatore non trovato", 422]);
+        }
+
+        if(!is_numeric($data->colpi_inizio) || $data->colpi_inizio < 0){
+            return response()->json(['success' => false, 'message' => "Il numero di colpi inizio deve essere positivo", 422]);
+        }        
+        
+        try{
+            LavorazioniCucitura::create([
+                'fase_id' => 4,
+                'codice_commessa' => $data->codice_commessa,
+                'codice_macchina' => $data->codice_macchina,
+                'codice_operatore' => $data->codice_operatore,
+                'n_colpi_start' => $data->colpi_inizio,
+                'macchina_condivisa' => $data->macchina_condivisa,
+                'timestamp_inizio' => now()
+            ]);
+            return response()->json(['success' => true, 'message' => "success created lavorazione"]);
+        }catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => "error created lavorazione, error: " . $e->getMessage()], 422);
+        }
+    }
+    public function uscita_cucitura(Request $data, $id_lavorazione){
+
+        $this->validate($data, [
+            'colpi_fine' => 'required',
+        ],
+        [
+            'colpi_fine.required' => 'Il numero di colpi fine e\' obbligatorio',
+        ]);
+
+        if(!is_numeric($data->colpi_fine) || $data->colpi_fine < 0){
+            return response()->json(['success' => false, 'message' => "Il numero di colpi fine deve essere positivo", 422]);
+        }
+
+        try{
+            $lavorazione = LavorazioniCucitura::find($id_lavorazione);
+
+            if($lavorazione->n_colpi_start > $data->colpi_fine){
+                return response()->json(['success' => false, 'message' => "Il numero di colpi fine deve essere maggiore del numero di colpi inizio (< $lavorazione->n_colpi_start)"], 422);
+            }
+
+            $lavorazione->timestamp_fine = now();
+            $lavorazione->n_colpi_end = $data->colpi_fine;
+            $lavorazione->save();
+            return response()->json(['success' => true, 'message' => "success modified lavorazione number $id_lavorazione"]);
+        }catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => "error modified lavorazione number, error: " . $e->getMessage()], 422);
+        }
     }
 
     public function brossura(){

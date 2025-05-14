@@ -15,11 +15,11 @@
         </div>
     @endif
 
-    <div class="container">
+    <div class="table-responsive">
             <table id="datatable-generic" class="table table-bordered table-striped table-dark" >
                 <thead class="thead-light">
                     <tr>
-                        <th><strong>Fase ID</strong></th>
+                        <th><strong>Id</strong></th>
                         <th><strong>Codice Operatore</strong></th>
                         <th><strong>Codice Commessa</strong></th>
                         <th><strong>Codice Macchina</strong></th>
@@ -31,7 +31,7 @@
                     @foreach($registrazioni_raccolta as $lavorazione)
                     <tr id="row-{{ $lavorazione->id_lr }}">
 
-                        <td>{{ $lavorazione->fase_id }}</td>
+                        <td>{{ $lavorazione->id_lr }}</td>
                         <td>{{ $lavorazione->codice_operatore }}</td>
                         <td>{{ $lavorazione->codice_commessa }}</td>
                         <td>{{ $lavorazione->codice_macchina }}</td>

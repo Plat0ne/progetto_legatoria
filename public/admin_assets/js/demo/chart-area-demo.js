@@ -26,13 +26,12 @@ function number_format(number, decimals, dec_point, thousands_sep) {
   }
   return s.join(dec);
 }
-
 // Area Chart Example
 var ctx = document.getElementById("myAreaChart");
 var myLineChart = new Chart(ctx, {
   type: 'line',
   data: {
-    labels: ["8:00", "9:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00"],
+    labels: ["8:00", "8:30", "9:00", "9:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30", "19:00", "19:30"],
     datasets: [{
       label: "Temperatura",
       lineTension: 0.3,
@@ -46,7 +45,7 @@ var myLineChart = new Chart(ctx, {
       pointHoverBorderColor: "rgba(78, 115, 223, 1)",
       pointHitRadius: 10,
       pointBorderWidth: 2,
-      data: [22, 22.5, 23, 23.5, 24, 24.5, 25, 25.5, 26, 26.5, 27, 27.5],
+      data: [22, 22.5, 23, 23.5, 24, 24.5, 25, 25.5, 26, 26.5, 26, 26.5, 25, 25.5, 25, 25.5, 24, 24.5, 24, 23.5, 23, 23.5, 22, 22.5],
     },
     {
       label: "Umidità",
@@ -61,7 +60,7 @@ var myLineChart = new Chart(ctx, {
       pointHoverBorderColor: "rgba(255, 99, 132, 1)",
       pointHitRadius: 10,
       pointBorderWidth: 2,
-      data: [60, 55, 50, 50, 55, 55, 60, 65, 65, 65, 65, 65],
+      data: [60, 55, 50, 50, 55, 55, 60, 65, 65, 65, 65, 60, 60, 60, 65, 65, 65, 65, 60, 60, 60, 65, 57, 55],
     }],
   },
   options: {
@@ -131,4 +130,5 @@ var myLineChart = new Chart(ctx, {
     }
   }
 });
+
 

@@ -17,6 +17,7 @@ class LavorazioniRaccolta extends Model
     protected $primaryKey = 'id_lr';
     public $incrementing = true;
     protected $keyType = 'int';
+    public $timestamps = false;
 
     protected $fillable = [
         'fase_id',

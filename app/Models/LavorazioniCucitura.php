@@ -13,7 +13,7 @@ class LavorazioniCucitura extends Model
     protected $primaryKey = 'id_lc';
     public $incrementing = true;
     protected $keyType = 'int';
-
+    public $timestamps = false;
     protected $fillable = [
         'fase_id',
         'codice_operatore',

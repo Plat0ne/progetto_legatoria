@@ -110,6 +110,7 @@
                     'id_lavorazione': id_lavorazione
                 },
                 success: function(response) {
+                    console.log(response);
                     if (response.success === true) {
                         if (modalInstance) {
                             modalInstance.hide(); // chiudo quell' istanza che era blobale
@@ -123,12 +124,10 @@
                     }
                 },
                 error: function(xhr, status, error) {
+                    var errors = xhr.responseJSON;
                     if (xhr.status == 422) {
-                        var errors = xhr.responseJSON.errors;
-                        $.each(errors, function(index, value) {
-                            console.log(value);
-                            error_msg.append(value + '<br>');
-                        });
+                        console.log(errors);
+                        error_msg.html(errors.message);
                         error_msg.addClass('text-danger');
                     }
                 }
@@ -164,8 +163,8 @@
             if (isNaN(segnatura)) {
                 messaggi_errore.push('Inserire un numero per la segnatura');
             }
-            if (isNaN(numero_copie_inizio) || numero_copie_inizio <= 0) {
-                messaggi_errore.push('Inserire un numero di copie maggiore di zero');
+            if (isNaN(numero_copie_inizio) || numero_copie_inizio < 0) {
+                messaggi_errore.push('Inserire un numero di copie positivo');
             }
             if (messaggi_errore.length > 0) {
                 messaggi_errore.forEach(function(messaggio) {

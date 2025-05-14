@@ -32,7 +32,7 @@
             <!-- Fine della barra laterale sinistra -->
 
             <!-- Wrapper del contenuto -->
-            <div id="content-wrapper" class="d-flex flex-column" style="background: linear-gradient(to right,rgb(236, 238, 241),rgb(149, 202, 232));">
+            <div id="content-wrapper" class="d-flex flex-column" style="background: linear-gradient(to right,rgb(236, 238, 241),rgb(101, 204, 255));">
                 <!-- Contenuto principale -->
                 <div id="content">
                     <!-- Barra superiore -->
@@ -66,6 +66,10 @@
                                     <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                                         <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                         Logout
+                                    </a>
+                                    <a class="dropdown-item" href="{{ route('welcome') }}">
+                                        <i class="fas fa-home fa-sm fa-fw mr-2 text-gray-400"></i>
+                                        Torna alla pagina iniziale
                                     </a>
                                 </div>
                             </li>

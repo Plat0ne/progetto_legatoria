@@ -110,7 +110,7 @@
                     if (modalInstance) {
                         modalInstance.hide(); // chiudo quell' istanza che era blobale
                     }
-                    $('#carta_lavorazione_' + id_lavorazione.toLowerCase()).remove();
+                    $('#carta_lavorazione_' + id_lavorazione).remove();
                 },
                 error: function(xhr) {
                     var errors = xhr.responseJSON.errors;
@@ -183,11 +183,7 @@
                 },
                 success: function(response){
                     if (response.success === true) {
-                        if (modalInstance) {
-                            modalInstance.hide(); // chiudo quell' istanza che era blobale
-                            location.reload();
-                        }
-                        $('#carta_lavorazione_' + id_lavorazione.toLowerCase()).remove();
+                        location.reload();
                     } else {
                         var error = response;
                         console.log(error.message);

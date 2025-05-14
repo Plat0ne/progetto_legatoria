@@ -18,9 +18,15 @@ Route::prefix('produzione')->name('produzione.')->group(function () {
     Route::get('/piega', [ProduzioneController::class, 'piega'])->name('piega');
     Route::post('/piega/entrata',[ProduzioneController::class, 'entrata_piega'])->name('piega.entrata');
     Route::post('/piega/uscita/{id_lavorazione}',[ProduzioneController::class, 'uscita_piega'])->name('piega.uscita');
-
+    #Routes produzione Raccolta
     Route::get('/raccolta', [ProduzioneController::class, 'raccolta'])->name('raccolta');
+    Route::post('/raccolta/entrata',[ProduzioneController::class, 'entrata_raccolta'])->name('raccolta.entrata');
+    Route::post('/raccolta/uscita/{id_lavorazione}',[ProduzioneController::class, 'uscita_raccolta'])->name('raccolta.uscita');
+    #Routes produzione Cucitura
     Route::get('/cucitura', [ProduzioneController::class, 'cucitura'])->name('cucitura');
+    Route::post('/cucitura/entrata',[ProduzioneController::class, 'entrata_cucitura'])->name('cucitura.entrata');
+    Route::post('/cucitura/uscita/{id_lavorazione}',[ProduzioneController::class, 'uscita_cucitura'])->name('cucitura.uscita');
+    
     Route::get('/brossura', [ProduzioneController::class, 'brossura'])->name('brossura');
 });
 
@@ -49,7 +55,6 @@ Route::middleware(['controlloSessione'])->group(function () {
 
         });
     });
-
     
     //routes per gli operatori CRUD:
     Route::post("/operatori", [WorkerController::class, 'store'])->name('operatori.store');

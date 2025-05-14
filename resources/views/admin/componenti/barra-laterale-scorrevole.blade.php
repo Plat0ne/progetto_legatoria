@@ -34,17 +34,15 @@
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
             aria-expanded="true" aria-controls="collapseTwo">
-            <i class="far fa-fw fa-clock"></i>
-            <span></span>
+            <span class="text-white"><i class="far fa-fw fa-clock"></i> Tempistiche fasi:</span>
         </a>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="py-2 collapse-inner rounded bg-info">
-                <h6 class="collapse-header text-white">Tempi lavorazione fasi:</h6>
-                <a class="collapse-item" href="{{ route('lavorazioni.taglio') }}"><i class="fas fa-fw fa-cut"></i> Taglio</a>
-                <a class="collapse-item" href="{{ route('lavorazioni.piega') }}"><i class="fas fa-fw fa-layer-group"></i> Piega</a>
-                <a class="collapse-item" href="{{ route('lavorazioni.raccolta') }}"><i class="fas fa-fw fa-people-carry"></i> Raccolta</a>
-                <a class="collapse-item" href="{{ route('lavorazioni.cucitura') }}"><i class="fas fa-dot-circle"></i> Cucitura</a>
-                <a class="collapse-item" href="{{ route('lavorazioni.brossura') }}"><i class="fas fa-book-open"></i> Brossura</a>
+                <a class="collapse-item {{ $rotta_corrente=='lavorazioni.taglio'?'active':'' }}" href="{{ route('lavorazioni.taglio') }}"><i class="fas fa-fw fa-cut"></i> Taglio</a>
+                <a class="collapse-item {{ $rotta_corrente=='lavorazioni.piega'?'active':'' }}" href="{{ route('lavorazioni.piega') }}"><i class="fas fa-fw fa-layer-group"></i> Piega</a>
+                <a class="collapse-item {{ $rotta_corrente=='lavorazioni.raccolta'?'active':'' }}" href="{{ route('lavorazioni.raccolta') }}"><i class="fas fa-fw fa-people-carry"></i> Raccolta</a>
+                <a class="collapse-item {{ $rotta_corrente=='lavorazioni.cucitura'?'active':'' }}" href="{{ route('lavorazioni.cucitura') }}"><i class="fas fa-dot-circle"></i> Cucitura</a>
+                <a class="collapse-item {{ $rotta_corrente=='lavorazioni.brossura'?'active':'' }}" href="{{ route('lavorazioni.brossura') }}"><i class="fas fa-book-open"></i> Brossura</a>
                 
             </div>
         </div>
@@ -54,13 +52,11 @@
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
             aria-expanded="true" aria-controls="collapseUtilities">
-            <i class="fas fa-fw fa-wrench"></i>
-            <span></span>
+                <span class="collapse-header"><i class="fas fa-fw fa-wrench"></i> Monitoring Azienda:</span>
         </a>
         <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
             data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner">
-                <h6 class="collapse-header">Monitoring Azienda:</h6>
                 <a class="collapse-item" href="{{ route('admin.statistiche.fasi') }}">Statistiche Fasi</a>
                 <a class="collapse-item" href="{{ route('admin.statistiche.orari') }}">Orari operatori</a>
             </div>
@@ -72,19 +68,18 @@
 
     <!-- Heading -->
     <div class="sidebar-heading">
-        Gestione Personale
+        gestione
     </div>
 
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse_gestione_personale"
             aria-expanded="true" aria-controls="collapse_gestione_personale">
-            <i class="fas fa-fw fa-user"></i>
-            <span></span>
+            
+            <span class="collapse-header text-white"><i class="fas fa-fw fa-user"></i>Gestione Personale:</span>
         </a>
         <div id="collapse_gestione_personale" class="collapse" aria-labelledby="headingUtilities"
             data-parent="#accordionSidebar">
             <div class="bg-info text-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header text-white">Gestione Personale:</h6>
 
                 <a class="collapse-item" href="{{ route('admin.utenti.index') }}">
                     <i class="fas fa-fw fa-user bg-primary rounded"></i>
