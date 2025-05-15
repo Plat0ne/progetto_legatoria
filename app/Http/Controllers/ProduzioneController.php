@@ -16,6 +16,8 @@ class ProduzioneController extends Controller
 
     }
 
+    
+
     public function taglio(){
         return view('produzione.taglio',[
             'title' => 'Taglio',
@@ -121,7 +123,7 @@ class ProduzioneController extends Controller
             return response()->json(['success' => true, 'message' => "success modified lavorazione number $id_lavorazione"]);
         }
         catch (\Exception $e) {
-            return response()->json(['success' => false, 'message' => "error modified lavorazione number, error: " . $e->getMessage()], 422);
+            return response()->json(['success' => false, 'message' => "error modified lavorazione number $id_lavorazione, error: " . $e->getMessage()], 422);
         }
     }
     public function entrata_piega(Request $data){
@@ -223,9 +225,11 @@ class ProduzioneController extends Controller
             $lavorazione->save();
             return response()->json(['success' => true, 'message' => "success modified lavorazione number $id_lavorazione"]);
         }catch (\Exception $e) {
-            return response()->json(['success' => false, 'message' => "error modified lavorazione number, error: " . $e->getMessage()], 422);
+            return response()->json(['success' => false, 'message' => "error modified lavorazione number $id_lavorazione, error: " . $e->getMessage()], 422);
         }
     }
+
+
 
     public function cucitura(){
         return view('produzione.cucitura',[
@@ -298,9 +302,11 @@ class ProduzioneController extends Controller
             $lavorazione->save();
             return response()->json(['success' => true, 'message' => "success modified lavorazione number $id_lavorazione"]);
         }catch (\Exception $e) {
-            return response()->json(['success' => false, 'message' => "error modified lavorazione number, error: " . $e->getMessage()], 422);
+            return response()->json(['success' => false, 'message' => "error modified lavorazione number $id_lavorazione, error: " . $e->getMessage()], 422);
         }
     }
+
+
 
     public function brossura(){
         return view('produzione.brossura',[
@@ -308,5 +314,46 @@ class ProduzioneController extends Controller
             'lavorazioni' => LavorazioniBrossura::where('timestamp_fine', null)->get()
         ]);
     }
-    
+    public function entrata_brossura(Request $data){
+        $this->validate($data, [
+            'codice_commessa' => 'required',
+            'codice_macchina' => 'required',
+            'codice_operatore' => 'required',
+        ],
+        [
+            'codice_commessa.required' => 'La commessa é obbligatoria',
+            'codice_macchina.required' => 'La macchina é obbligatoria',
+            'codice_operatore.required' => 'L\'operatore é obbligatoria',
+        ]);
+
+        $operatore = Worker::where('codice_operatore', $data->codice_operatore)->first();
+        if(!$operatore){
+            return response()->json(['success' => false, 'message' => "operatore $data->codice_operatore non trovato", 422]);
+        }
+        
+        try{
+            LavorazioniBrossura::create([
+                'fase_id' => 5,
+                'codice_commessa' => $data->codice_commessa,
+                'codice_macchina' => $data->codice_macchina,
+                'codice_operatore' => $data->codice_operatore,
+                'timestamp_inizio' => now()
+            ]);
+            return response()->json(['success' => true, 'message' => "success created lavorazione"]);
+        }
+        catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => "error created lavorazione, error: " . $e->getMessage()], 422);
+        }
+        
+    }
+    public function uscita_brossura(Request $data, $id_lavorazione){
+        try{
+            $lavorazione = LavorazioniBrossura::find($id_lavorazione);
+            $lavorazione->timestamp_fine = now();
+            $lavorazione->save();
+            return response()->json(['success' => true, 'message' => "success modified lavorazione number $id_lavorazione"]);
+        }catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => "error modified lavorazione number $id_lavorazione, error: " . $e->getMessage()], 422);
+        }
+    }
 }

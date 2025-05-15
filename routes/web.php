@@ -28,6 +28,10 @@ Route::prefix('produzione')->name('produzione.')->group(function () {
     Route::post('/cucitura/uscita/{id_lavorazione}',[ProduzioneController::class, 'uscita_cucitura'])->name('cucitura.uscita');
     
     Route::get('/brossura', [ProduzioneController::class, 'brossura'])->name('brossura');
+    Route::post('/brossura/entrata',[ProduzioneController::class, 'entrata_brossura'])->name('brossura.entrata');
+    Route::post('/brossura/uscita/{id_lavorazione}',[ProduzioneController::class, 'uscita_brossura'])->name('brossura.uscita');
+
+
 });
 
 

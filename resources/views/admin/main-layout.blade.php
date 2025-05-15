@@ -64,11 +64,11 @@
                                     aria-labelledby="userDropdown">
                                 
                                     <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                        <i class="fas text-dark fa-sign-out-alt fa-sm fa-fw mr-2"></i>
                                         Logout
                                     </a>
                                     <a class="dropdown-item" href="{{ route('welcome') }}">
-                                        <i class="fas fa-home fa-sm fa-fw mr-2 text-gray-400"></i>
+                                        <i class="fas text-dark fa-home fa-sm fa-fw mr-2"></i>
                                         Torna alla pagina iniziale
                                     </a>
                                 </div>

@@ -13,6 +13,7 @@ class LavorazioniBrossura extends Model
     protected $primaryKey = 'id_lb';
     public $incrementing = true;
     protected $keyType = 'int';
+    public $timestamps = false;
 
     protected $fillable = [
         'fase_id',
