@@ -75,7 +75,7 @@
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse_gestione_personale"
             aria-expanded="true" aria-controls="collapse_gestione_personale">
             
-            <span class="collapse-header text-white"><i class="fas fa-fw fa-user"></i>Gestione Personale:</span>
+            <span class="collapse-header text-white"><i class="fas fa-fw fa-user"></i>Gestione :</span>
         </a>
         <div id="collapse_gestione_personale" class="collapse" aria-labelledby="headingUtilities"
             data-parent="#accordionSidebar">
@@ -88,6 +88,10 @@
                 <a class="collapse-item" href="{{ route('operatori.index') }}">
                     <i class="fas fa-fw fa-hard-hat bg-warning rounded"></i>
                     Operatori</a>
+
+                <a class="collapse-item" href="{{ route('macchine.index') }}">
+                    <i class="fas fa-fw fa-solid fa-robot bg-danger rounded"></i>
+                    Macchine</a>
             </div>
         </div>
     </li>

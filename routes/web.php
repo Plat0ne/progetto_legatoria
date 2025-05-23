@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\{AuthenticationController, DashboardController, UserControllerAdmin, StatisticheController};
 use App\Http\Controllers\Admin\{LavorazioniTaglioController, LavorazioniBrossuraController, LavorazioniCucituraController, LavorazioniRaccoltaController, LavorazioniPiegaController};
-use App\Http\Controllers\{WelcomeController, WorkerController, ProduzioneController};
+use App\Http\Controllers\{WelcomeController, WorkerController, ProduzioneController, MacchineController};
 
 Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
 
@@ -42,7 +42,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
 });
 
 
-Route::middleware(['controlloSessione'])->group(function () {
+Route::middleware(['controlloSessione'])->group(function () { 
+    //middleware è la parte che controlla la sicurezza, se non sei loggato non puoi entrare!!
     Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
       
@@ -66,6 +67,12 @@ Route::middleware(['controlloSessione'])->group(function () {
     Route::put("/operatori/{worker}", [WorkerController::class, 'update'])->name('operatori.update');
     Route::delete("/operatori/{worker}", [WorkerController::class, 'destroy'])->name('operatori.destroy');
 
+    //routes per le macchine CRUD:
+    Route::post("/macchine", [MacchineController::class, 'store'])->name('macchine.store');
+    Route::get("/macchine", [MacchineController::class, 'index'])->name('macchine.index');
+    Route::put("/macchine/{macchina}", [MacchineController::class, 'update'])->name('macchine.update');
+    Route::delete("/macchine/{macchina}", [MacchineController::class, 'destroy'])->name('macchine.destroy');
+
     Route::prefix('lavorazioni')->name('lavorazioni.')->group(function () {
         Route::get('/taglio', [LavorazioniTaglioController::class, 'index'])->name('taglio');
         Route::get('/piega', [LavorazioniPiegaController::class, 'index'])->name('piega');
@@ -75,7 +82,7 @@ Route::middleware(['controlloSessione'])->group(function () {
     });
 });
 
-
+//quando accedi ad una pagina che non esiste ci pensa la fallback
 Route::fallback(function () {
     return redirect()->route('welcome');
 });
