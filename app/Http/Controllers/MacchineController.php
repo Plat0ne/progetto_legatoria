@@ -59,14 +59,14 @@ class MacchineController extends Controller
     public function update(Request $request, Macchine $macchina)
     {
         $request->validate([
-            'codice_macchina' => 'required|string|unique:macchine,codice_macchina',
+            'codice_macchina' => 'required|string|unique:macchine,codice_macchina,' . $macchina->id_macchina . ',id_macchina',
             'suffisso_macchina' => 'required|string'
         ]);
 
         try {
             $macchina->update([
-                'codice_operatore' => $request->codice_operatore,
-                'suffisso_operatore' => $request->suffisso_operatore
+                'codice_macchina' => $request->codice_macchina,
+                'suffisso_macchina' => $request->suffisso_macchina,
             ]);
 
             return response()->json([
