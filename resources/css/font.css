@@ -8,3 +8,31 @@ body {
   font-family: var(--main-font) !important; 
 }
 
+/* Animazione sfondo (in questo caso per un bottone)*/
+.anim-bg-gradient {
+  background: linear-gradient(120deg, rgb(2, 0, 139), rgb(20, 83, 220), rgb(0, 225, 255));
+  background-size: 200% 100%;
+  background-position: 100% 0;
+  transition: background-position .5s;
+}
+
+.anim-bg-gradient:hover {
+  background-position: 0 0;
+}
+
+/* Animazione testo prova */
+.text-fill {
+  text-decoration: none;
+  -webkit-text-fill-color: rgb(44, 156, 221);
+  /* -webkit-text-stroke: thin rgb(16, 67, 161); */
+}
+
+.text-fill:hover {
+  -webkit-text-fill-color: rgb(24, 50, 165);
+}
+
+.parent {
+  font-size: 2.7rem;
+  font-weight: bold;
+}
+

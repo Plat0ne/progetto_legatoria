@@ -57,8 +57,8 @@
         <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
             data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner">
-                <a class="collapse-item" href="{{ route('admin.statistiche.fasi') }}">Statistiche Fasi</a>
-                <a class="collapse-item" href="{{ route('admin.statistiche.orari') }}">Orari operatori</a>
+                <a class="collapse-item" href="{{ route('admin.statistiche.fasi') }}"><i class="fas fa-stream" aria-hidden="true"></i> Statistiche Fasi</a>
+                <a class="collapse-item" href="{{ route('admin.statistiche.orari') }}"><i class="fas fa-solid fa-clock" aria-hidden="true"></i> Orari operatori</a>
             </div>
         </div>
     </li>

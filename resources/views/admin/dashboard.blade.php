@@ -32,7 +32,7 @@
     </div>
 
     <hr class="hr-color-black">
-    <h2 class="mb-4 text-primary">Orari Fasi giornata {{ date('d/m/Y') }}</h2>
+    <h2 class="mb-4 text-fill">Orari Fasi giornata {{ date('d/m/Y') }}</h2>
 
     <div class="row">
         <!-- Orari Fasi -->
