@@ -31,11 +31,15 @@
         <div class="row">
             @foreach ($statistiche as $fase => $dati)
                 <div class="col-md-6 col-xl-4 mb-4">
-                    <div class="card border-0 shadow-sm h-100">
+                    <div class="card article-card border-0 shadow-sm h-100">
                         <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
                             <h5 class="mb-0">{{ $fase }}</h5>
                             <i class="bi bi-graph-up-arrow"></i>
                         </div>
+                        <div class="card-body">
+                            <div class="article-card__image">
+                                <img src="{{ asset('img/' . strtolower($fase) . '.png') }}" alt="{{ $fase }}">
+                            </div>
                         <div class="card-body">
                             <p class="mb-1">
                                 @if ($fase == 'Taglio')
@@ -59,6 +63,7 @@
                             </p>
                         </div>
                     </div>
+                </div>
                 </div>
             @endforeach
         </div>

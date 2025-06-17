@@ -1,0 +1,40 @@
+body {
+  padding: 0px;
+  margin: 0px;
+}
+
+.center {
+  display: flex;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+}
+
+.article-card {
+  width: 275px;
+  height: 240px;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  margin: 20px;
+  box-sizing: border-box;
+  overflow: hidden;
+  transform: scale(1);
+  transition: all 300ms;
+  display: flex;
+  flex-direction: column;
+}
+
+.article-card:hover {
+  transform: scale(1.1);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22) !important;
+  transition: all 300ms;
+}
+
+.article-card img {
+  width: 50%;
+  height: 50%;
+  object-fit: cover;
+}
+
