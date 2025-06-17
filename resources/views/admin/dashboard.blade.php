@@ -38,7 +38,7 @@
         <!-- Orari Fasi -->
         @foreach ($orari_giornata_fase as $fase => $orario)
             <div class="col-12 col-sm-6 col-md-4 col-lg-4 ">
-                <div class="card shadow mb-4">
+                <div class="card article-card shadow mb-4">
                     <!-- Card Header - Dropdown -->
                     <div
                         class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
