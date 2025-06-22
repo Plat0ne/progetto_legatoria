@@ -35,12 +35,19 @@
                     <td>{{ $m->codice_macchina }}</td>
                     <td>{{ $m->suffisso_macchina }}</td>
                     <td>
-                        <button class="modificaButton btn btn-sm btn-warning text-dark" data-id="{{ $m }}" data-toggle="modal" data-target="#editModal">Modifica</button>
+                        <button class="edit-button" data-id="{{ $m }}" data-toggle="modal" data-target="#editModal">
+                        <span class="text">Modifica</span>
+                        <span class="icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                            <path d="M3 17.25V21h3.75L17.81 7.94l-3.75-3.75L3 17.25zM20.71 5.63c-1.59 0-3.05.51-4.23 1.43l-1.42 1.42c-.81.81-1.43 1.94-1.43 3.05v12.59c0 1.61.51 3.05 1.43 4.23l1.42 1.42c.81.81 1.94 1.43 3.05 1.43h12.59c1.61 0 3.05-.51 4.23-1.43l1.42-1.42c.81-.81 1.43-1.94 1.43-3.05v-12.59c0-1.61-.51-3.05-1.43-4.23l-1.42-1.42c-.81-.81-1.94-1.43-3.05-1.43H20.71z"/>
+                            </svg>
+                        </span>   
+                    </button>
                         <form action="{{ route('macchine.destroy', $m->id_macchina) }}" method="POST" style="display:inline;" onsubmit="return confirm('Sei sicuro?')">
                             @csrf
                             @method('DELETE')
                             <!-- <button class="btn btn-sm btn-danger">Elimina</button> -->
-                             <button class="noselect">
+                             <button class="noselect-button">
                             <span class='text'>Elimina</span>
                             <span class="icon">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">

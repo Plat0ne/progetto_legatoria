@@ -4,7 +4,7 @@
 	box-sizing: border-box;
 }
 
-.noselect {
+.edit-button {
   -webkit-touch-callout: none;
     -webkit-user-select: none;
      -khtml-user-select: none;
@@ -14,34 +14,36 @@
 		-webkit-tap-highlight-color: transparent;
 }
 
-.noselect-button {
+.edit-button {
 	width: 100px;
 	height: 30px;
 	cursor: pointer;
 	display: flex;
 	align-items: center;
-	background: red;
+    justify-content: space-between;
+    border-left: 1px solid #e6b822;
+	background: rgb(255, 174, 0);
 	border: none;
 	border-radius: 5px;
 	box-shadow: 1px 1px 3px rgba(0,0,0,0.15);
-	background: #e62222;
+	background: #e6b822;
 }
 
-.noselect-button, .noselect-button span {
+.edit-button, .edit-button span {
 	transition: 200ms;
 }
 
-.noselect-button .text {
+.edit-button .text {
 	transform: translateX(4px);
 	color: white;
 	font-weight: bold;
-	font-size: 15px;
+    font-size: 15px;
     vertical-align: middle;
+
 }
 
-.noselect-button .icon {
+.edit-button .icon {
 	position: absolute;
-	border-left: 1px solid #c41b1b;
 	transform: translateX(70px);
 	height: 30px;
 	width: 30px;
@@ -50,25 +52,25 @@
 	justify-content: center;
 }
 
-.noselect-button svg {
+.edit-button svg {
 	width: 10px;
 	fill: #eee;
 }
 
-.noselect-button:hover {
-	background: #ff3636;
+.edit-button:hover {
+	background: #e6b822;
 }
 
-.noselect-button:hover .text {
+.edit-button:hover .text {
 	color: transparent;
 }
 
-.noselect-button:hover .icon {
+.edit-button:hover .icon {
 	width: 100px;
 	border-left: none;
 	transform: translateX(0);
 }
 
-.noselect-button:focus {
+.edit-button:focus {
 	outline: none;
 }
