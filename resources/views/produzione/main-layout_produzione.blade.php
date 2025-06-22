@@ -25,6 +25,8 @@
             text-align: right;
         }
         </style>
+
+        @vite(['resources/css/fill.css'])
     </head>
 
     <body id="pagina-inizio" class="bg-success">
