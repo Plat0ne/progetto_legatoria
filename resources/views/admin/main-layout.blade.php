@@ -23,7 +23,7 @@
         <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 
         <!-- Font personalizzati per questo template-->
-        @vite(['resources/css/app.css', 'resources/css/font.css', 'resources/css/star-button.css', 'resources/css/cards.css', 'resources/css/delete.css', 'resources/css/edit.css', 'resources/js/app.js'])
+        @vite(['resources/css/app.css', 'resources/css/font.css', 'resources/css/star-button.css', 'resources/css/cards.css', 'resources/css/delete.css', 'resources/css/edit.css', 'resources/css/click.css', 'resources/js/app.js'])
 
     </head>
 
@@ -140,7 +140,7 @@
                         <button class="btn btn-secondary" type="button" data-dismiss="modal">Annulla</button>
                         <form method="POST" action="{{ route('admin.logout') }}">
                             @csrf
-                            <button type="submit" class="btn btn-primary">Logout</button>
+                            <button type="submit" class="button-arrow--sky">Logout</button>
                         </form>
                     </div>
                 </div>
