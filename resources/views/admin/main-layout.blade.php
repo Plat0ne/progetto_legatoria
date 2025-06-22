@@ -23,7 +23,7 @@
         <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 
         <!-- Font personalizzati per questo template-->
-        @vite(['resources/css/app.css', 'resources/css/font.css', 'resources/css/star-button.css', 'resources/css/cards.css', 'resources/js/app.js'])
+        @vite(['resources/css/app.css', 'resources/css/font.css', 'resources/css/star-button.css', 'resources/css/cards.css', 'resources/css/delete.css', 'resources/js/app.js'])
 
     </head>
 
@@ -120,6 +120,9 @@
         <a class="scroll-to-top rounded" href="#pagina-inizio">
             <i class="fas fa-angle-up"></i>
         </a>
+
+        </div>
+        <!-- Fine del wrapper della pagina -->
 
         <!-- la modal di logout -->
         <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
