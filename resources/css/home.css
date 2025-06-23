@@ -1,0 +1,36 @@
+.button-sliding-to-bottom--black {
+  min-width: 70px;
+  height: 50px;
+  color: #fff;
+  padding: 5px 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+  outline: none;
+  border-radius: 5px;
+  z-index: 0;
+  background: #fff;
+  overflow: hidden;
+  border: none;
+  color: #4b565f;
+}
+.button-sliding-to-bottom--black:hover {
+  color: #fff;
+  border-color: #4b565f;
+}
+.button-sliding-to-bottom--black:hover:after {
+  height: 100%;
+}
+.button-sliding-to-bottom--black:after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  transition: all 0.3s ease;
+  left: 0;
+  top: 0;
+  height: 0;
+  width: 100%;
+  background: #4b565f;
+}

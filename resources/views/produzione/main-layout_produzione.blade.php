@@ -26,7 +26,7 @@
         }
         </style>
 
-        @vite(['resources/css/fill.css', 'resources/css/start.css'])
+        @vite(['resources/css/fill.css', 'resources/css/start.css', 'resources/css/home.css'])
     </head>
 
     <body id="pagina-inizio" class="bg-success">
@@ -47,8 +47,8 @@
 
                 @if (Route::currentRouteName() != 'produzione.home')
                     <div class="d-flex justify-content-center">
-                        <a href="{{ route('produzione.home') }}" class="btn btn-light btn-lg mb-3">
-                            <i class="fas fa-home"></i>
+                        <a href="{{ route('produzione.home') }}" class="button-sliding-to-bottom--black">
+                            <i class="fas fa-home fa-2x" style="font-size: 2.5em;"></i>
                         </a>
                     </div>
                 @endif
