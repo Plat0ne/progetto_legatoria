@@ -14,6 +14,7 @@ body {
   background-size: 200% 100%;
   background-position: 100% 0;
   transition: background-position .5s;
+  font-weight: bold;
 }
 
 .anim-bg-gradient:hover {
