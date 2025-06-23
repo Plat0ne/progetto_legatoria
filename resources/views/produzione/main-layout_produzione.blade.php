@@ -26,7 +26,7 @@
         }
         </style>
 
-        @vite(['resources/css/fill.css'])
+        @vite(['resources/css/fill.css', 'resources/css/start.css'])
     </head>
 
     <body id="pagina-inizio" class="bg-success">

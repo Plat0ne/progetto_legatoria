@@ -37,7 +37,7 @@
 
 							<div id="error_msg_entrata" class="text-danger"></div>
 							<div class="d-grid">
-								<button class="btn btn-danger btn-lg mt-2" id="bottone_inizia" type="button">INIZIA</button>
+								<button class="button-3d--orange" id="bottone_inizia" type="button">INIZIA</button>
 							</div>
 						</form>
 					</div>
