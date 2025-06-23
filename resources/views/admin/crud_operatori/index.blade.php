@@ -122,7 +122,7 @@
             </div>
            
             <div class="mb-3">
-                <label for="numero_operatore" class="form-label">numero casa/famiglia</label>
+                <label for="numero_operatore" class="form-label">Numero casa/famiglia</label>
                 <input type="tel" name="numero_operatore" id="numero_operatore" class="form-control" required placeholder="es. 0123456789">
             </div>
 
@@ -130,8 +130,8 @@
 
         </div>
         <div class="modal-footer">
-          <button id="aggiugni_operatore" type="button" class="btn btn-success">Salva</button>
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
+          <button id="aggiugni_operatore" type="button" class="button-3d--green">Salva</button>
+          <button type="button" class="button-3d--grey" data-dismiss="modal">Chiudi</button>
         </div>
       </div>
     </form>

@@ -140,8 +140,8 @@
 
         </div>
         <div class="modal-footer">
-          <button id="aggiugni_utente" type="button" class="btn btn-success">Salva</button>
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
+          <button id="aggiugni_utente" type="button" class="button-3d--green">Salva</button>
+          <button type="button" class="button-3d--grey" data-dismiss="modal">Chiudi</button>
         </div>
       </div>
     </form>
