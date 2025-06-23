@@ -23,7 +23,7 @@
         <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 
         <!-- Font personalizzati per questo template-->
-        @vite(['resources/css/app.css', 'resources/css/font.css', 'resources/css/star-button.css', 'resources/css/cards.css', 'resources/css/delete.css', 'resources/css/edit.css', 'resources/css/click.css', 'resources/css/fill.css', 'resources/css/cancel.css', 'resources/js/app.js'])
+        @vite(['resources/css/app.css', 'resources/css/font.css', 'resources/css/cards.css', 'resources/css/delete.css', 'resources/css/edit.css', 'resources/css/click.css', 'resources/css/fill.css', 'resources/css/cancel.css', 'resources/css/save.css', 'resources/js/app.js'])
 
     </head>
 
