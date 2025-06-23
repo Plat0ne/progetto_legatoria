@@ -2,7 +2,7 @@
 	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content">
 			<div class="modal-header bg-primary text-white">
-				<h4 class="modal-title" id="entrataModalLabel" style="text-align: center; font-weight: bold;">Inserisci i dati per incominciare a lavorare</h4>
+				<h4 class="modal-title" id="entrataModalLabel" style="text-align: center; font-weight: bold;">Inserisci i dati per iniziare</h4>
 			</div>
 			<div class="modal-body" id="modal-body">
 				{{-- <div class="row mb-3">
