@@ -2,7 +2,7 @@
 	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content">
 			<div class="modal-header bg-primary text-white">
-				<h5 class="modal-title" id="uscitaModalLabel"></h5> <!-- inserisci qui l' id_lav (sei sicuro di terminare $id_lav) ? -->
+				<h5 class="modal-title" id="uscitaModalLabel" style="text-align: center; font-weight: bold;"></h5> <!-- inserisci qui l' id_lav (sei sicuro di terminare $id_lav) ? -->
 			</div>
 			<div class="modal-body" id="modal-body">
 				<div class="row mb-3">
@@ -20,7 +20,7 @@
 							</div>
 							<div id="error_msg_uscita" class="text-danger"></div>
 							<div class="d-grid">
-								<button class="btn btn-danger btn-lg" id="bottone_esci">ESCI</button>
+								<button class="button-3d--orange" id="bottone_esci">ESCI</button>
 							</div>
 						</form>
 					</div>
