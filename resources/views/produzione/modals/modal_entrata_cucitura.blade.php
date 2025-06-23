@@ -9,10 +9,10 @@
 					<div class="col">
 						<form id="form_entrata">
 							<div class="row mb-3">
-                                <input type="number" class="form-control" id="codice_commessa" name="codice_commessa" placeholder="codice commessa" style="background-color: #f5f5f5;">
-                                <input type="text" class="form-control" id="codice_macchina" name="codice_macchina" placeholder="codice macchina" style="background-color: #f5f5f5;">
-                                <input type="text" class="form-control" id="codice_operatore" name="codice_operatore" placeholder="codice operatore" style="background-color: #f5f5f5;">
-                                <input type="text" class="form-control" id="colpi_inizio" name="colpi_inizio" placeholder="contatore macchina colpi" style="background-color: #f5f5f5;">
+                                <input type="number" class="form-control" id="codice_commessa" name="codice_commessa" placeholder="Codice commessa" style="background-color: #f5f5f5;">
+                                <input type="text" class="form-control" id="codice_macchina" name="codice_macchina" placeholder="Codice macchina" style="background-color: #f5f5f5;">
+                                <input type="text" class="form-control" id="codice_operatore" name="codice_operatore" placeholder="Codice operatore" style="background-color: #f5f5f5;">
+                                <input type="text" class="form-control" id="colpi_inizio" name="colpi_inizio" placeholder="Contatore macchina colpi" style="background-color: #f5f5f5;">
 								<div class="form-check form-switch">
 									<input class="form-check-input" type="checkbox" name="macchina_condivisa" id="macchina_condivisa" value="1">
 									<label class="form-check-label ms-2" for="macchina_condivisa">Macchina Condivisa</label>
