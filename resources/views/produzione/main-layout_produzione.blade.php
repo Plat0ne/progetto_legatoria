@@ -36,9 +36,9 @@
             <!-- Inizio del contenuto principale -->
             <div class="container-fluid">
                 <div class="clock-container d-lg-block text-dark mr-3">
-                    <span id="clock" style="text-shadow: -2px 0 white, 0 2px white, 2px 0 white, 0 -2px white;"></span>
+                    <span id="clock"></span>
                 </div>
-                <h1 class="mb-4 text-dark" style="text-shadow: -2px 0 white, 0 2px white, 2px 0 white, 0 -2px white;">
+                <h1 class="mb-4 text-dark fw-bold">
                     <strong>
                         @yield('icon')
                         {{ $title }}

@@ -7,7 +7,7 @@
 			<div class="modal-body" id="modal-body">
 				<div class="row mb-3">
 					<div class="col">
-						<h1 class="text-primary">Premendo esci verrà registrato l' orario di lavoro</h1>
+						<h1 class="text-primary">Premendo esci verrà registrato l'orario di lavoro</h1>
 					</div>
 				</div>
 				<div class="row mb-5">
