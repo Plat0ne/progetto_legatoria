@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
 
-:root {
+:root { /* per font dell'app. web */
   --main-font: 'Montserrat', sans-serif;
 }
 
@@ -17,22 +17,19 @@ body {
   font-weight: bold;
 }
 
-.anim-bg-gradient:hover {
-  background-position: 0 0;
+.anim-bg-gradient:hover { /* per effetto hover (quando si passa con il mouse sopra) */
+  background-position: 0 0; /* da sinistra a destra */
 }
 
-/* Animazione testo prova */
+/* Animazione testo  */
 .text-fill {
   text-decoration: none;
   -webkit-text-fill-color: rgb(44, 156, 221);
-  /* -webkit-text-stroke: thin rgb(16, 67, 161); */
 }
-
-.text-fill:hover {
+.text-fill:hover { /* per effetto hover, ma legato al testo */
   -webkit-text-fill-color: rgb(24, 50, 165);
 }
-
-.parent {
+.parent { /* per il testo */
   font-size: 2.7rem;
   font-weight: bold;
 }

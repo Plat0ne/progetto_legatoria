@@ -1,35 +1,35 @@
-.button-arrow--sky {
-  min-width: 90px;
-  height: 40px;
-  color: #fff;
-  padding: 5px 10px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: all 0.3s ease;
+.button-arrow--sky { 
+  min-width: 90px; /* larghezza */
+  height: 40px; /* altezza */
+  color: #fff; /* colore testo */
+  padding: 5px 10px; /* spazio (padding) interno */
+  font-weight: bold; /* font in grassetto */
+  cursor: pointer; 
+  transition: all 0.3s ease; /* animazione di transizione di 0.3s */
   position: relative;
-  display: inline-block;
-  outline: none;
+  display: inline-block; 
+  outline: none; 
   overflow: hidden;
-  border-radius: 5px;
-  border: none;
-  background-color: #3a86ff
+  border-radius: 5px; /* bordi arrotondati */
+  border: none; 
+  background-color: #3a86ff /* colore di sfondo (del bottone) */
 }
 .button-arrow--sky:hover {
-  border-radius: 5px;
-  padding-right: 24px;
-  padding-left:8px;
+  border-radius: 5px; /* bordi arrotondati */
+  padding-right: 24px; /* spazio (padding) a destra */
+  padding-left:8px; /* spazio (padding) a sinistra */
 }
 .button-arrow--sky:hover:after {
-  opacity: 1;
+  opacity: 1; /* freccia viene visualizzata */
   right: 10px;
 }
 .button-arrow--sky:after {
-  content: "\00BB";
-  position: absolute;
-  opacity: 0;
-  font-size: 20px;
-  line-height: 40px;
-  top: 0;
-  right: -20px;
-  transition: 0.4s;
+  content: "\00BB"; /* freccia a destra (carattere unicode) ">>" */
+  position: absolute; 
+  opacity: 0; /* freccia viene nascosta */
+  font-size: 20px; /* dimensione freccia */
+  line-height: 40px; /* altezza (posizione) freccia */
+  top: 0; /* posizione verticale */
+  right: -20px; /* posizione orizzontale */
+  transition: 0.4s; /* animazione di transizione (0.4s) */
 }

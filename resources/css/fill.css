@@ -1,38 +1,38 @@
-.button-sliding-to-top--sky {
-  width: 900px;
-  height: 60px;
-  color: #fff;
+.button-sliding-to-top--sky { /* per bottoni in home_produzione */
+  width: 900px; /* larghezza */
+  height: 60px; /* altezza */
+  color: #fff; 
   padding: 5px 10px;
-  font-weight: bold;
-  font-size: 21px;
-  text-align: center;
+  font-weight: bold; /* font in grassetto */
+  font-size: 21px; /* dimensione del testo */
+  text-align: center; /* allineamento orizzontale (al centro) */
   line-height: 50px;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.3s ease; /* animazione di 0.3s*/
   position: relative;
   display: inline-block;
   outline: none;
   border-radius: 5px;
-  z-index: 0;
+  z-index: 0; /* z-index = elementi non vengono sovrapposti ad altri */
   background: #fff;
-  overflow: hidden;
-  border: 2px solid #1f8b11;
+  overflow: hidden; /* per evitare che il contenuto venga spostato fuori dalla card */
+  border: 2px solid #1f8b11; /* colore e spessore del bordo */
   color: #1f8b11;
 }
-.button-sliding-to-top--sky:hover {
+.button-sliding-to-top--sky:hover { /* per effetto hover (quando si passa con il mouse sopra) */
   color: #fff;
 }
-.button-sliding-to-top--sky:hover:after {
+.button-sliding-to-top--sky:hover:after { /* per effetto hover (quando si passa con il mouse sopra) */
   height: 100%;
 }
-.button-sliding-to-top--sky:after {
+.button-sliding-to-top--sky:after { /* dopo effetto scorrimento del bottone */
   content: "";
   position: absolute;
   z-index: -1;
   transition: all 0.3s ease;
-  left: 0;
-  bottom: 0;
-  height: 0;
-  width: 100%;
+  left: 0; /* posizione a sinistra */
+  bottom: 0; /* posizione in basso */
+  height: 0; /* altezza = 0, in modo che non sia visibile inizialmente*/
+  width: 100%; /* larghezza */
   background: #1f8b11;
 }

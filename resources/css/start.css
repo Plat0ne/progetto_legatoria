@@ -1,4 +1,4 @@
-.button-3d--orange {
+.button-3d--orange { /* per bottoni in home_produzione  */
   min-width: 130px;
   height: 40px;
   color: #fff;
@@ -14,11 +14,11 @@
   background: #ef9023;
   box-shadow: 0 5px #d95904;
 }
-.button-3d--red:hover {
-  box-shadow: 0 3px #d95904;
-  top: 1px;
+.button-3d--orange:hover { /* per effetto hover (quando si passa con il mouse sopra) */
+  box-shadow: 0 3px #d95904; /* per aumentare/creare l'ombra */
+  top: 1px; /* per spostare il bottone di 1px in alto */
 }
-.button-3d--red:active {
-  box-shadow: 0 0 #d95904;
-  top: 5px;
+.button-3d--orange:active { /* per effetto click (quando si fa click) */
+  box-shadow: 0 0 #d95904; /* per rimuovere l'ombra */
+  top: 5px; /* per spostare il bottone di 5px in basso */
 }

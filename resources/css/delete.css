@@ -1,74 +1,75 @@
-* {
+* { /* reset di tutti gli elementi */
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
 }
 
-.noselect {
-  -webkit-touch-callout: none;
-    -webkit-user-select: none;
-     -khtml-user-select: none;
-       -moz-user-select: none;
-        -ms-user-select: none;
-            user-select: none;
-		-webkit-tap-highlight-color: transparent;
+.noselect { /* per disabilitare la selezione del testo */
+  -webkit-touch-callout: none;  /* su dispositivi con browser WebKit */
+    -webkit-user-select: none; /* su dispositivi con browser WebKit, come Android e iOS */
+     -khtml-user-select: none; /* su dispositivi con browser KHTML, come Safari */
+       -moz-user-select: none; /* su dispositivi con browser Mozilla, come Firefox */
+        -ms-user-select: none; /* su dispositivi con browser Microsoft, come IE */
+            user-select: none; /* su tutti i dispositivi e browser */
+		-webkit-tap-highlight-color: transparent; /* disabilita la vis. del highlight su disp. mobili */
 }
 
 .noselect-button {
-	width: 100px;
-	height: 30px;
+	width: 100px; /* larghezza */
+	height: 30px; /* altezza */
 	cursor: pointer;
-	display: flex;
-	align-items: center;
-	background: red;
+	display: flex; /* elementi disposti orizzontalmente */
+	justify-content: space-between;
+	align-items: center; /* allineamento verticale (al centro)*/
+	background: red; /* colore di sfondo (del bottone) */
 	border: none;
 	border-radius: 5px;
 	box-shadow: 1px 1px 3px rgba(0,0,0,0.15);
-	background: #e62222;
+	background: #e62222; 
 }
 
 .noselect-button, .noselect-button span {
-	transition: 200ms;
+	transition: 200ms; /* transizione di 200ms per effetto */
 }
 
 .noselect-button .text {
 	transform: translateX(4px);
-	color: white;
-	font-weight: bold;
-	font-size: 15px;
-    vertical-align: middle;
+	color: white; /* colore del testo */
+	font-weight: bold; /* font in grassetto */
+	font-size: 15px; /* dimensione del testo */
+    vertical-align: middle; /* allineamento verticale (al centro) */
 }
 
-.noselect-button .icon {
-	position: absolute;
-	border-left: 1px solid #c41b1b;
+.noselect-button .icon { /* per l'icona */
+	position: absolute; 
+	border-left: 1px solid #c41b1b; /* colore del bordo */
 	transform: translateX(70px);
-	height: 30px;
-	width: 30px;
+	height: 30px; /* altezza */
+	width: 30px; /* larghezza */
 	display: flex;
-	align-items: center;
-	justify-content: center;
+	align-items: center; 
+	justify-content: center; /* allineamento orizzontale (al centro) */
 }
 
-.noselect-button svg {
-	width: 10px;
-	fill: #eee;
+.noselect-button svg { /* stile icona svg */
+	width: 10px; /* larghezza */
+	fill: #eee; /* colore */
 }
 
-.noselect-button:hover {
+.noselect-button:hover { /* per effetto hover (quando si passa con il mouse sopra) */
 	background: #ff3636;
 }
 
-.noselect-button:hover .text {
+.noselect-button:hover .text { /* per effetto hover, ma legato al testo */
 	color: transparent;
 }
 
-.noselect-button:hover .icon {
+.noselect-button:hover .icon { /* per effetto hover, ma legato all'icona */
 	width: 100px;
 	border-left: none;
 	transform: translateX(0);
 }
 
-.noselect-button:focus {
+.noselect-button:focus { /* quando ci si clicca sopra */
 	outline: none;
 }

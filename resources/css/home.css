@@ -1,6 +1,6 @@
-.button-sliding-to-bottom--black {
-  min-width: 70px;
-  height: 50px;
+.button-sliding-to-bottom--black { /* per bottone in home_produzione (scorrimento in basso) */
+  min-width: 70px; /* larghezza */
+  height: 50px; /* altezza */
   color: #fff;
   padding: 5px 10px;
   font-weight: bold;
@@ -16,14 +16,14 @@
   border: none;
   color: #4b565f;
 }
-.button-sliding-to-bottom--black:hover {
+.button-sliding-to-bottom--black:hover { /* per effetto hover (quando si passa con il mouse sopra) */
   color: #fff;
   border-color: #4b565f;
 }
-.button-sliding-to-bottom--black:hover:after {
+.button-sliding-to-bottom--black:hover:after { /* per effetto hover (quando si passa con il mouse sopra) */
   height: 100%;
 }
-.button-sliding-to-bottom--black:after {
+.button-sliding-to-bottom--black:after { /* dopo effetto scorrimento del bottone */
   content: "";
   position: absolute;
   z-index: -1;

@@ -4,35 +4,35 @@ body {
 }
 
 .center {
-  display: flex;
-  height: 100vh;
-  align-items: center;
-  justify-content: center;
+  display: flex; 
+  height: 100vh; /* altezza */
+  align-items: center; /* centra verticalmente */
+  justify-content: center; /* centra orizzontalmente */
 }
 
 .article-card {
-  width: 275px;
-  height: 210px;
-  border-radius: 12px;
+  width: 275px; /* larghezza */
+  height: 210px; /* altezza */
+  border-radius: 12px; /* bordi arrotondati */
   overflow: hidden;
   position: relative;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-  margin: 20px;
-  box-sizing: border-box;
-  overflow: hidden;
-  transform: scale(1);
-  transition: all 300ms;
-  display: flex;
-  flex-direction: column;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); /* ombra della card */
+  margin: 20px; /* spazio tra le card */
+  box-sizing: border-box; /* per evitare che la card aumenti al contenuto */
+  overflow: hidden; /* per evitare che il contenuto venga spostato fuori dalla card */
+  transform: scale(1); 
+  transition: all 300ms; /* l'effetto di zoom */
+  display: flex; /* per centrare il contenuto */
+  flex-direction: column; 
 }
 
-.article-card:hover {
+.article-card:hover { /* quando ci si passa con il mouse sopra (alle card) */
   transform: scale(1.1);
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22) !important;
-  transition: all 300ms;
+  transition: all 300ms; /* effetto zoom */
 }
 
-.article-card img {
+.article-card img { /* contenuto all'interno della card */
   width: 50%;
   height: 50%;
   object-fit: cover;

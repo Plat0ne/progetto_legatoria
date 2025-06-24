@@ -1,35 +1,36 @@
+/* Bottone per annulla */
 .button-arrow--sand {
-  min-width: 95px;
-  height: 41px;
-  color: #fff;
+  min-width: 95px; /* larghezza */
+  height: 41px; /* altezza */
+  color: #fff; /* colore testo */
   padding: 5px 10px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  position: relative;
-  display: inline-block;
-  outline: none;
-  overflow: hidden;
-  border-radius: 5px;
-  border: none;
-  background-color: #ced4da
+  font-weight: bold; /* font in grassetto */
+  cursor: pointer; 
+  transition: all 0.3s ease; /* animazione di transizione */
+  position: relative; 
+  display: inline-block; /* elemento in linea */
+  outline: none; /* bordo nero */
+  overflow: hidden; 
+  border-radius: 5px; /* bordi arrotondati */
+  border: none; 
+  background-color: #ced4da /* colore di sfondo */
 }
 .button-arrow--sand:hover {
-  border-radius: 5px;
-  padding-right: 24px;
-  padding-left:8px;
+  border-radius: 5px; /* bordi arrotondati */
+  padding-right: 24px; /* spazio a destra */
+  padding-left:8px; /* spazio a sinistra */
 }
 .button-arrow--sand:hover:after {
-  opacity: 1;
-  right: 10px;
+  opacity: 1; /* freccia viene visualizzata */
+  right: 10px; /* posizione orizzontale */
 }
 .button-arrow--sand:after {
-  content: "\00BB";
+  content: "\00BB"; /* freccia a destra (carattere unicode) ">>" */
   position: absolute;
-  opacity: 0;
-  font-size: 20px;
-  line-height: 40px;
-  top: 0;
-  right: -20px;
-  transition: 0.4s;
+  opacity: 0; /* freccia viene nascosta */
+  font-size: 20px; /* dimensione freccia */
+  line-height: 40px; /* altezza riga/linea a 40px */
+  top: 0; /* posizione verticale */
+  right: -20px; /* posizione orizzontale */
+  transition: 0.4s; /* animazione di transizione di 0.4 sec*/
 }

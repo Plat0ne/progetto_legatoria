@@ -1,4 +1,4 @@
-.button-3d--green {
+.button-3d--green { /* per bottone salva */
   min-width: 90px;
   height: 35px;
   color: #fff;
@@ -14,11 +14,11 @@
   background: #80ed99;
   box-shadow: 0 5px #57cc99;
 }
-.button-3d--green:hover {
+.button-3d--green:hover { /* per effetto hover (quando si passa con il mouse sopra) */
   box-shadow: 0 3px #57cc99;
   top: 1px;
 }
-.button-3d--green:active {
-  box-shadow: 0 0 #57cc99;
-  top: 5px;
+.button-3d--green:active { /* per effetto click (quando si fa click) */
+  box-shadow: 0 0 #57cc99; /* per rimuovere l'ombra */
+  top: 5px; /* per spostare il bottone di 5px in basso */
 }

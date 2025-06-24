@@ -1,76 +1,76 @@
-* {
+* { /* reset di tutti gli elementi/ di stile */
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
 }
 
-.edit-button {
-  -webkit-touch-callout: none;
-    -webkit-user-select: none;
-     -khtml-user-select: none;
-       -moz-user-select: none;
-        -ms-user-select: none;
-            user-select: none;
-		-webkit-tap-highlight-color: transparent;
+.edit-button { /* per disabilitare la selezione del testo */
+  -webkit-touch-callout: none;  /* su dispositivi con browser WebKit */
+    -webkit-user-select: none; /* su dispositivi con browser WebKit, come Android e iOS */
+     -khtml-user-select: none; /* su dispositivi con browser KHTML, come Safari */
+       -moz-user-select: none; /* su dispositivi con browser Mozilla, come Firefox */
+        -ms-user-select: none; /* su dispositivi con browser Microsoft, come IE */
+            user-select: none; /* su tutti i dispositivi e browser */
+		-webkit-tap-highlight-color: transparent; /* disabilita la vis. del highlight su disp. mobili */
 }
 
-.edit-button {
-	width: 100px;
-	height: 30px;
+.edit-button { /* bottone modifica */
+	width: 100px; /* larghezza */
+	height: 30px; /* altezza */
 	cursor: pointer;
 	display: flex;
 	align-items: center;
-    justify-content: space-between;
-    border-left: 1px solid #e6b822;
-	background: rgb(255, 174, 0);
+    justify-content: space-between; /* allineamento orizzontale (al centro) */
+    border-left: 1px solid #e6b822; /* colore del bordo */
+	background: rgb(255, 174, 0); /* colore di sfondo (del bottone) */
 	border: none;
-	border-radius: 5px;
+	border-radius: 5px; /* bordi arrotondati */
 	box-shadow: 1px 1px 3px rgba(0,0,0,0.15);
 	background: #e6b822;
 }
 
-.edit-button, .edit-button span {
-	transition: 200ms;
+.edit-button, .edit-button span { 
+	transition: 200ms; /* animazione di transizione di 200ms */
 }
 
-.edit-button .text {
-	transform: translateX(4px);
-	color: white;
-	font-weight: bold;
-    font-size: 15px;
-    vertical-align: middle;
+.edit-button .text { /* per il testo */
+	transform: translateX(4px); 
+	color: white; /* colore del testo */
+	font-weight: bold; /* font in grassetto */
+    font-size: 15px; /* dimensione del testo */
+    vertical-align: middle; /* allineamento verticale (al centro) */
 
 }
 
-.edit-button .icon {
+.edit-button .icon { /* per l'icona */
 	position: absolute;
 	transform: translateX(70px);
-	height: 30px;
-	width: 30px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
+	height: 30px; /* altezza */
+	width: 30px; /* larghezza */
+	display: flex; 
+	align-items: center; /* allineamento verticale (al centro) */
+	justify-content: center; /* allineamento orizzontale (al centro) */
 }
 
-.edit-button svg {
+.edit-button svg { /* stile icona svg */
 	width: 10px;
 	fill: #eee;
 }
 
-.edit-button:hover {
+.edit-button:hover { /* per effetto hover (quando si passa con il mouse sopra) */
 	background: #e6b822;
 }
 
-.edit-button:hover .text {
+.edit-button:hover .text { /* per effetto hover, ma legato al testo */
 	color: transparent;
 }
 
-.edit-button:hover .icon {
+.edit-button:hover .icon { /* per effetto hover, ma legato all'icona */
 	width: 100px;
 	border-left: none;
 	transform: translateX(0);
 }
 
-.edit-button:focus {
+.edit-button:focus { /* per il focus (quando si clicca sul bottone) */
 	outline: none;
 }
