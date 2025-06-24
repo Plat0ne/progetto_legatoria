@@ -1,3 +1,19 @@
+* { /* reset di tutti gli elementi */
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+.button-3d--green { /* per disabilitare la selezione del testo */
+  -webkit-touch-callout: none;  /* su dispositivi con browser WebKit */
+    -webkit-user-select: none; /* su dispositivi con browser WebKit, come Android e iOS */
+     -khtml-user-select: none; /* su dispositivi con browser KHTML, come Safari */
+       -moz-user-select: none; /* su dispositivi con browser Mozilla, come Firefox */
+        -ms-user-select: none; /* su dispositivi con browser Microsoft, come IE */
+            user-select: none; /* su tutti i dispositivi e browser */
+		-webkit-tap-highlight-color: transparent; /* disabilita la vis. del highlight su disp. mobili */
+}
+
 .button-3d--green { /* per bottone salva */
   min-width: 90px;
   height: 35px;
